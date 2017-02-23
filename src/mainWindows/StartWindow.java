@@ -18,9 +18,9 @@ public class StartWindow extends JFrame {
 	public final static int width = (int) screenSize.getWidth();
 	public final static int height = (int) screenSize.getHeight();
 
-	int stWinSize = 400;//розмыр вікна
-	JLabel title, user, password; // оголошення написів заголовок. користувач. пароль
-	JComboBox<String> userChoser; // оголошення випадаючого списку ролі користувача
+	int stWinSize = 400;//СЂРѕР·РјС–СЂ РІС–РєРЅР°
+	JLabel title, user, password; // РѕРіРѕР»РѕС€РµРЅРЅСЏ РЅР°РїРёСЃС–РІ
+	JComboBox<String> userChoser; // РѕРіРѕР»РѕС€РµРЅРЅСЏ РІРёРїР°РґР°СЋС‡РѕРіРѕ СЃРїРёСЃРєР° СЂРѕР»РµР№
 	
 	
 	
@@ -39,22 +39,22 @@ public class StartWindow extends JFrame {
 		setResizable(false);
 		getContentPane().setLayout(null);
 
-		title = new JLabel("Авторизація");
+		title = new JLabel("пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ");
 		title.setHorizontalAlignment(SwingConstants.CENTER);
 		title.setFont(new Font("Times New Roman", Font.BOLD, 15));
 		title.setSize(150, 30);
 		title.setLocation(getWidth()/2 - title.getWidth()/2, 11);
 		add (title);
 		
-		user = new JLabel("Користувач:");
+		user = new JLabel("пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ:");
 		user.setBounds(START_WIDTH_POINT*2, START_HEIGHT_POINT, 85, ELEMENT_HEIGHT);
 		getContentPane().add(user);
 		
 		userChoser = new JComboBox<String>();
-		String string[] = {"Адміністратор", "Гість"};
+		String string[] = {"пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ", "ГіпїЅпїЅпїЅ"};
 		userChoser.setModel(new DefaultComboBoxModel<String>(string));
 		userChoser.setBounds(195, START_HEIGHT_POINT, 146, TEXTFIELD_HEIGHT);
-		//userCombo.addActionListener(handler); //обробник списку
+		//userCombo.addActionListener(handler); //пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅ
 		add(userChoser);
 		
 
