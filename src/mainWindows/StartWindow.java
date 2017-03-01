@@ -7,7 +7,6 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.io.IOException;
 
-import javax.swing.DefaultComboBoxModel;
 import javax.swing.JButton;
 import javax.swing.JComboBox;
 import javax.swing.JFrame;
@@ -33,6 +32,8 @@ public class StartWindow extends JFrame {
 	JTextField userName;
 	JPasswordField passField;
 	JButton ok, cancel;
+
+	MainWindow mW = new MainWindow();
 
 	final int START_HEIGHT_POINT = 100;
 	final int START_WIDTH_POINT = 10;
@@ -105,12 +106,25 @@ public class StartWindow extends JFrame {
 
 	}
 
-	public static void main(String[] args) {   // коли все доробиться цей метод мейн тре буде звыдси забрати геть ы зробити окремий клас мейн.
+	public class eHandler implements ActionListener {
 
-		StartWindow stWin = new StartWindow("Best Store Login");
+		public void actionPerformed(ActionEvent e) {
 
-		stWin.setVisible(true);
+			if (e.getSource() == ok) {
 
+				if (checkPassword())
+
+					mW.setVisible(true);
+
+				dispose();
+			} else {
+				JOptionPane.showMessageDialog(null, "Введено невірний пароль");
+				return;
+			}
+			if (e.getSource() == cancel) {
+
+				System.exit(0);
+			}
+		}
 	}
-
 }
