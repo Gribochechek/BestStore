@@ -1,5 +1,7 @@
 package objectsForStore;
 
+import main.Main;
+
 //У кожного товару є наступні властивості - назва, опис, виробник, кількість на складі, ціна за одиницю.
 public class Goods {
 	
@@ -122,5 +124,13 @@ public class Goods {
 	public String toString() {
 		return "Goods [goodsID=" + goodsID + ", subgroupID=" + subgroupID + ", name=" + name + ", desc=" + desc
 				+ ", maker=" + maker + ", unit=" + unit + ", quantity=" + quantity + ", price=" + price + "]";
+	}
+
+	public int getGroupID() {
+		for (int i = 0; i < Main.mainWindow.subgroups.size(); i++){
+			if (Main.mainWindow.subgroups.get(i).getSubgroupID() == subgroupID) 
+				return Main.mainWindow.subgroups.get(i).getGroupID();
+		}
+		return -1;
 	}
 }

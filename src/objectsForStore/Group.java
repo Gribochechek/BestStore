@@ -1,11 +1,12 @@
 package objectsForStore;
 
+import java.io.Serializable;
 
-public class Group {
+public class Group implements Serializable{
 	
 	private static int uniqueID = 1;
 	
-	private int groupID;
+	private static int groupID;
 	private String groupName;
 	private String groupDesc;
 

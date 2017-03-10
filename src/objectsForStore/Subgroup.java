@@ -5,6 +5,7 @@ public class Subgroup {
 	private static int uniqueID = 1;
 	
 	private int subgroupID;
+	int groupID;
 	private String subgroupName;
 
 	public Subgroup(int subgroupID, String subgroupName) {
@@ -43,6 +44,10 @@ public class Subgroup {
 	@Override
 	public String toString() {
 		return "Subgroup [subgroupID=" + subgroupID + ", subgroupName=" + subgroupName + "]";
+	}
+
+	public int getGroupID() {
+		return groupID;
 	}
 
 }

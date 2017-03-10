@@ -6,6 +6,7 @@ public class SaleGoods {
 	
 	private int saleGoodsID;
 	private String date;
+	private String unit;
 	private double quantity;
 	private double price;
 	
@@ -58,6 +59,14 @@ public class SaleGoods {
 
 	public void setPrice(double price) {
 		this.price = price;
+	}
+
+	public String getUnit() {
+		return unit;
+	}
+
+	public void setUnit(String unit) {
+		this.unit = unit;
 	}
 
 	@Override
