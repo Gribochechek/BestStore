@@ -6,6 +6,7 @@ import java.awt.Font;
 import java.awt.Point;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
+import java.io.IOException;
 import java.util.ArrayList;
 
 import javax.swing.ButtonGroup;
@@ -34,6 +35,9 @@ import objectsForStore.Goods;
 import objectsForStore.Group;
 import objectsForStore.SaleGoods;
 import objectsForStore.Subgroup;
+import streams.GoodsReader;
+import streams.GroupsReader;
+import streams.SubgroupsReader;
 import tableModels.TableModelGoods;
 import tableModels.TableModelSaleGoods;
 
@@ -101,10 +105,10 @@ public class MainWindow extends JFrame implements ChangeListener {
 
 	// --------------------------------------------------------------
 
-	public MainWindow() {
+	public MainWindow() throws IOException {
 		super();
 
-		setSize(900, 670);
+		setSize(1000, 670);
 		setResizable(false);
 		setLocationRelativeTo(null);
 
@@ -131,6 +135,14 @@ public class MainWindow extends JFrame implements ChangeListener {
 		groups = new ArrayList<Group>();
 		subgroups = new ArrayList<Subgroup>();
 		saleGoods = new ArrayList<SaleGoods>();
+		
+		// Fill Arraylists 
+		GoodsReader gr = new GoodsReader();
+		goods = gr.getProductsList();
+		GroupsReader grr = new GroupsReader();
+		groups = grr.getGroupsList();
+		SubgroupsReader sgr = new SubgroupsReader();
+		subgroups = sgr.getSubGroupsList();
 
 		// Table Goods
 		goodsModel = new TableModelGoods(goods);
@@ -138,6 +150,7 @@ public class MainWindow extends JFrame implements ChangeListener {
 		setColumnWidth(goodsTable, new int[] { 10, 110, 110, 180, 20, 20, 20 });
 		jsp1 = new JScrollPane(goodsTable);
 		jsp1.setBounds(20, 80, 850, 351);
+		
 
 		// Table SaleGoods
 		saleGoodsModel = new TableModelSaleGoods(saleGoods);

@@ -12,7 +12,7 @@ import javax.swing.border.EmptyBorder;
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 
-import com.jgoodies.forms.factories.DefaultComponentFactory;
+//import com.jgoodies.forms.factories.DefaultComponentFactory;
 
 import main.Main;
 import objectsForStore.Group;
@@ -60,7 +60,7 @@ public class WindowGroupAdd extends JDialog {
 		contentPanel.setBorder(new LineBorder(Color.GRAY));
 		getContentPane().add(contentPanel, BorderLayout.CENTER);
 		{
-			labelGroupName = DefaultComponentFactory.getInstance().createLabel("Type group name:");
+			labelGroupName = new JLabel("Type group name:");
 			labelGroupName.setFont(new Font("Tahoma", Font.PLAIN, 21));
 			contentPanel.add(labelGroupName);
 		}

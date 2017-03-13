@@ -25,6 +25,7 @@ public class Goods {
 		this.quantity = quantity;
 		this.price = price;
 		this.unit = unit;
+		uniqueID++;
 	}
 	
 	public Goods(int ID, int subgroupID, String name, double price, double quantity, String unit) {
@@ -34,6 +35,7 @@ public class Goods {
 		this.quantity = quantity;
 		this.price = price;
 		this.unit = unit;
+		uniqueID++;
 	}
 	
 	public Goods(int ID, int subgroupID, String name, double quantity, String unit) {

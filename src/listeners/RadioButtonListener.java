@@ -54,6 +54,7 @@ public class RadioButtonListener implements ActionListener {
 			Main.mainWindow.radio2.setSelected(true);
 			int index = Main.mainWindow.comboGroup.getSelectedIndex();
 			int groupID = Main.mainWindow.groups.get(index).getGroupID();
+			System.out.println(groupID);
 
 			ArrayList<Goods> tempGoods = new ArrayList<Goods>();
 			for (int i = 0; i < Main.mainWindow.goods.size(); i++) {

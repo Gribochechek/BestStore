@@ -4,12 +4,13 @@ public class Subgroup {
 	
 	private static int uniqueID = 1;
 	
+	private int groupID;
 	private int subgroupID;
-	int groupID;
 	private String subgroupName;
 
-	public Subgroup(int subgroupID, String subgroupName) {
+	public Subgroup(int groupID, int subgroupID, String subgroupName) {
 		this.subgroupID = subgroupID;
+		this.groupID = groupID;
 		this.subgroupName = subgroupName;
 		if (uniqueID < subgroupID) {
 			uniqueID = subgroupID;
@@ -48,6 +49,10 @@ public class Subgroup {
 
 	public int getGroupID() {
 		return groupID;
+	}
+	
+	public void setGroupID(int groupID) {
+		this.groupID = groupID;
 	}
 
 }

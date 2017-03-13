@@ -6,7 +6,7 @@ public class Group implements Serializable{
 	
 	private static int uniqueID = 1;
 	
-	private static int groupID;
+	private int groupID;
 	private String groupName;
 	private String groupDesc;
 
@@ -23,6 +23,7 @@ public class Group implements Serializable{
 		this.groupID = groupID;
 		this.groupName = groupName;
 		this.groupDesc = groupDesc;
+		uniqueID++;
 	}
 
 	public static int getUniqueID() {

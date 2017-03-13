@@ -36,6 +36,27 @@ public class TableModelGoods extends AbstractTableModel{
 	public int getRowCount() {
 		return goods.size();
 	}
+	
+	
+	public String getColumnName(int columnIndex) {
+	    switch (columnIndex) {
+	        case 0:
+	            return "ID";
+	        case 1:
+	            return "Product Name";
+	        case 2:
+	            return "Manufacturer";
+	        case 3:
+	            return "Description";
+	        case 4:
+	            return "Quantity";
+	        case 5:
+	            return "Unit";
+	        case 6:
+	            return "Price";
+	        }
+	    return "";
+	}
 
 	@Override
 	public Object getValueAt(int rowIndex, int columnIndex) {
@@ -58,5 +79,7 @@ public class TableModelGoods extends AbstractTableModel{
         }
         return "";
 	}
+	
+	
 
 }
