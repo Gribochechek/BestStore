@@ -28,12 +28,8 @@ public class Main {
 		
 		mainWindow = new MainWindow();
 		mainWindow.setVisible(true);
-		
-		JFrame f = new JFrame();
-		WindowGoodsAdd g = new WindowGoodsAdd(f);
-		g.setVisible(true);
 
-		
+			
 	}
 
 }

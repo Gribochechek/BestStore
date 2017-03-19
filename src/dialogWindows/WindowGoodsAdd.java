@@ -18,7 +18,9 @@ import javax.swing.JTextField;
 import javax.swing.SwingConstants;
 
 import main.Main;
+import mainWindows.MainWindow;
 import objectsForStore.Goods;
+import streams.GoodsWriter;
 
 public class WindowGoodsAdd extends JDialog{
 	
@@ -43,7 +45,7 @@ public class WindowGoodsAdd extends JDialog{
 		setResizable(false);
 		getContentPane().setLayout(null);
 		
-		title = new JLabel("Add new Good є" + Goods.getUniqueID());
+		title = new JLabel("Add new Good є" + (Main.mainWindow.goods.size()+1));
 		title.setHorizontalAlignment(SwingConstants.CENTER);
 		title.setFont(new Font("Times New Roman", Font.BOLD, 12));
 		title.setBounds(42, 11, 226, 30);
@@ -133,11 +135,13 @@ public class WindowGoodsAdd extends JDialog{
 		ok.setBounds(30, 367, 100, 23);
 		getContentPane().add(ok);
 		ok.addActionListener(available_handler);
+		Main.mainWindow.goodsTable.updateUI();
 		
 		cancel = new JButton ("—касувати");
 		cancel.setBounds(160, 367, 100, 23);
 		getContentPane().add(cancel);
 		cancel.addActionListener(available_handler);
+		
 	}
     
 	public class eHandler implements ActionListener{
@@ -156,6 +160,15 @@ public class WindowGoodsAdd extends JDialog{
 					JOptionPane.showMessageDialog(null, "¬вед≥ть дан≥ в поле \"ќдиниц€ вим≥ру\"");
 					return;
 				}
+				if (!isDouble(jt_price.getText())) {
+					JOptionPane.showMessageDialog(null, "Invalid price format");
+					return;
+				}
+				if (!isDouble(jt_quantity.getText())) {
+					JOptionPane.showMessageDialog(null, "Invalid quantity format");
+					return;
+				}
+				
 				else
 					setResult();
 					dispose(); // прибрати в≥кно
@@ -199,11 +212,35 @@ public class WindowGoodsAdd extends JDialog{
 		String quantity = setCommas(jt_quantity.getText());
 		String price = setCommas(jt_price.getText());
 		if (price.equals("")) price = "0";
+		//если товаров еще нет - приссваиваем первому ID = 1, если есть - ID последнего в списке +1
+		if(Main.mainWindow.goods.size()>0){
+		product = new Goods(Main.mainWindow.goods.get(Main.mainWindow.goods.size()-1).getID()+1, subgroupID, jt_name.getText(), jt_description.getText(), jt_producer.getText(), 
+				Double.parseDouble(quantity), Double.parseDouble(price), jt_measureType.getText());
+		}
+		else{
+			product = new Goods(1, subgroupID, jt_name.getText(), jt_description.getText(), jt_producer.getText(), 
+					Double.parseDouble(quantity), Double.parseDouble(price), jt_measureType.getText());
+		}
+		Main.mainWindow.goods.add(product);
+		GoodsWriter gw = new GoodsWriter();
+		gw.saveGoodsInFile(Main.mainWindow.goods);
 		
-		product = new Goods(Goods.getUniqueID(), subgroupID, jt_name.getText(), jt_description.getText(), jt_producer.getText(), 
-				Double.parseDouble(price), Double.parseDouble(quantity), jt_measureType.getText());
 		
 		Main.mainWindow.goodsTable.updateUI();
+	}
+	
+	
+	// method checks is string double?
+	public static boolean isDouble(String s) {
+		char c = s.charAt(0);
+		for (int i = 0; i < s.length(); i++) {
+			c = s.charAt(i);
+			if ((c >= '0' && c <= '9') || c == '.') {
+				continue;
+			} else
+				return false;
+		}
+		return true;
 	}
 
 }

@@ -36,6 +36,7 @@ import objectsForStore.Group;
 import objectsForStore.SaleGoods;
 import objectsForStore.Subgroup;
 import streams.GoodsReader;
+import streams.GoodsWriter;
 import streams.GroupsReader;
 import streams.SubgroupsReader;
 import tableModels.TableModelGoods;
@@ -54,13 +55,13 @@ public class MainWindow extends JFrame implements ChangeListener {
 
 	// --------------------------------------------------------
 
-	private JButton bGoodsAdd, bGoodsRemove, bGoodsEdit;
+	public JButton bGoodsAdd, bGoodsRemove, bGoodsEdit;
 	public JButton bGroupAdd;
-	private JButton bGroupRemove;
-	private JButton bGroupEdit;
-	private JButton bSubgroupAdd, bSubgroupRemove, bSubgroupEdit;
-	private JButton bSearch, bStatistic;
-	private JButton bSaleAdd, bSaleRemove, bSaleStatistic;
+	public JButton bGroupRemove;
+	public JButton bGroupEdit;
+	public JButton bSubgroupAdd, bSubgroupRemove, bSubgroupEdit;
+	public JButton bSearch, bStatistic;
+	public JButton bSaleAdd, bSaleRemove, bSaleStatistic;
 	public JRadioButton radio1, radio2, radio3, radio4, radio5, radio6;
 
 	// --------------------------------------------------------------
@@ -107,7 +108,7 @@ public class MainWindow extends JFrame implements ChangeListener {
 
 	public MainWindow() throws IOException {
 		super();
-
+		this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setSize(1000, 670);
 		setResizable(false);
 		setLocationRelativeTo(null);
@@ -143,11 +144,17 @@ public class MainWindow extends JFrame implements ChangeListener {
 		groups = grr.getGroupsList();
 		SubgroupsReader sgr = new SubgroupsReader();
 		subgroups = sgr.getSubGroupsList();
+		
+		
+		// export in Excel example
+		GoodsWriter gw = new GoodsWriter();
+		gw.exportGoodsInExcel(goods, "data");
 
 		// Table Goods
 		goodsModel = new TableModelGoods(goods);
 		goodsTable = new JTable(goodsModel);
-		setColumnWidth(goodsTable, new int[] { 10, 110, 110, 180, 20, 20, 20 });
+		goodsTable.getTableHeader().setReorderingAllowed(false);
+		setColumnWidth(goodsTable, new int[] { 5, 170, 60, 180, 15, 15, 20 });
 		jsp1 = new JScrollPane(goodsTable);
 		jsp1.setBounds(20, 80, 850, 351);
 		
@@ -269,16 +276,16 @@ public class MainWindow extends JFrame implements ChangeListener {
 
 		// RADIO BUTTONS on first tab
 		JLabel label2 = new JLabel("Show Goods:");
-		label2.setBounds(35, 45, 110, 21);
+		label2.setBounds(30, 45, 100, 23);
 		pFirstTab.add(label2);
 
 		radio1 = new JRadioButton("All Goods");
-		radio1.setBounds(150, 45, 50, 23);
+		radio1.setBounds(120, 45, 90, 23);
 		radio1.addActionListener(rbaListener);
 		pFirstTab.add(radio1);
 
 		radio2 = new JRadioButton("Only Groups: ");
-		radio2.setBounds(200, 45, 150, 23);
+		radio2.setBounds(210, 45, 100, 23);
 		radio2.addActionListener(rbaListener);
 		pFirstTab.add(radio2);
 
