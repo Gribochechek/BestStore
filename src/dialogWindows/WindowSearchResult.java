@@ -29,7 +29,7 @@ public class WindowSearchResult extends JDialog {
 	public WindowSearchResult(Frame parent, String keyword) {
 		super(parent, true);
 		for (int i = 0; i < Main.mainWindow.goods.size(); i++) {
-			if (Main.mainWindow.goods.get(i).getName().contains(keyword))
+			if (Main.mainWindow.goods.get(i).getName().toLowerCase().contains(keyword))
 				searchResultList.add(Main.mainWindow.goods.get(i));
 		}
 		setLocation(500, 200);

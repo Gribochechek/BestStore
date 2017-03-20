@@ -61,6 +61,7 @@ public class WindowSearch extends JDialog {
 					} else {
 
 						dispose();
+						keyword = keyword.toLowerCase();						
 						WindowSearchResult sr = new WindowSearchResult(Main.mainWindow, keyword);
 						sr.setVisible(true);
 					}
