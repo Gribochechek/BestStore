@@ -13,6 +13,7 @@ import dialogWindows.WindowGoodsEdit;
 import dialogWindows.WindowGroupAdd;
 import dialogWindows.WindowGroupDelete;
 import dialogWindows.WindowSearch;
+import dialogWindows.WindowStatisticGoods;
 import main.Main;
 
 public class ListenerButton implements ActionListener {
@@ -69,6 +70,13 @@ public class ListenerButton implements ActionListener {
 		
 		if (e.getSource() == Main.mainWindow.bSearch) {
 			WindowSearch dialog = new WindowSearch(Main.mainWindow);
+			dialog.setVisible(true);
+			dialog.setDefaultCloseOperation(WindowConstants.DISPOSE_ON_CLOSE);
+
+		}
+		
+		if (e.getSource() == Main.mainWindow.bStatistic) {
+			WindowStatisticGoods dialog = new WindowStatisticGoods(Main.mainWindow);
 			dialog.setVisible(true);
 			dialog.setDefaultCloseOperation(WindowConstants.DISPOSE_ON_CLOSE);
 

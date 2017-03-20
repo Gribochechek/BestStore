@@ -10,16 +10,18 @@ import javax.swing.ButtonGroup;
 import javax.swing.JButton;
 import javax.swing.JDialog;
 import javax.swing.JLabel;
+import javax.swing.JPanel;
 import javax.swing.JRadioButton;
+import javax.swing.JScrollPane;
 import javax.swing.SwingConstants;
-
 import main.Main;
 import objectsForStore.Goods;
-import streams.GoodsWriter;
 
 public class WindowSearchResult extends JDialog {
 
 	JLabel title;
+	JScrollPane jsp;
+	JPanel panel;
 
 	JButton ok, cancel;
 	ArrayList<Goods> searchResultList = new ArrayList<Goods>();
@@ -29,7 +31,9 @@ public class WindowSearchResult extends JDialog {
 	public WindowSearchResult(Frame parent, String keyword) {
 		super(parent, true);
 		for (int i = 0; i < Main.mainWindow.goods.size(); i++) {
-			if (Main.mainWindow.goods.get(i).getName().toLowerCase().contains(keyword))
+			if (Main.mainWindow.goods.get(i).getName().toLowerCase().contains(keyword)
+					|| Main.mainWindow.goods.get(i).getMaker().toLowerCase().contains(keyword)
+					|| Main.mainWindow.goods.get(i).getDesc().toLowerCase().contains(keyword))
 				searchResultList.add(Main.mainWindow.goods.get(i));
 		}
 		setLocation(500, 200);
@@ -66,19 +70,18 @@ public class WindowSearchResult extends JDialog {
 			jradioList = new ButtonGroup();
 			jrb = new JRadioButton[searchResultList.size()];
 			JRadioButton button = new JRadioButton(searchResultList.get(0).getName(), true);
-			button.setBounds(20, 45 , 250, 23);
+			button.setBounds(20, 45, 250, 23);
 			jrb[0] = button;
 			jradioList.add(button);
 			getContentPane().add(button);
 
-			for (int i = 1; i <= searchResultList.size()-1; i++) {
+			for (int i = 1; i <= searchResultList.size() - 1; i++) {
 				button = new JRadioButton(searchResultList.get(i).getName());
 				button.setBounds(20, 45 + i * 25, 250, 23);
 				jradioList.add(button);
 				jrb[i] = button;
 				getContentPane().add(button);
 			}
-			
 
 			ok = new JButton("Show");
 			ok.setBounds(30, 120 + 25 * searchResultList.size(), 100, 23);
@@ -88,18 +91,18 @@ public class WindowSearchResult extends JDialog {
 				@Override
 				public void actionPerformed(ActionEvent e) {
 					int tempID = 0, rawIndex = 0;
-					for(int i = 0;i<searchResultList.size();i++){
-						if(jrb[i].isSelected()){
+					for (int i = 0; i < searchResultList.size(); i++) {
+						if (jrb[i].isSelected()) {
 							tempID = searchResultList.get(i).getID();
 							break;
 						}
 					}
-					for(int i = 0; i<Main.mainWindow.goods.size();i++){
-						if(Main.mainWindow.goods.get(i).getID()==tempID){
+					for (int i = 0; i < Main.mainWindow.goods.size(); i++) {
+						if (Main.mainWindow.goods.get(i).getID() == tempID) {
 							rawIndex = Main.mainWindow.goods.indexOf(Main.mainWindow.goods.get(i));
 						}
 					}
-					
+
 					Main.mainWindow.goodsTable.setRowSelectionInterval(rawIndex, rawIndex);
 					dispose();
 				}
@@ -118,6 +121,7 @@ public class WindowSearchResult extends JDialog {
 				}
 
 			});
+
 		}
 	}
 
