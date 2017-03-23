@@ -2,7 +2,7 @@ package objectsForStore;
 
 import main.Main;
 
-//У кожного товару є наступні властивості - назва, опис, виробник, кількість на складі, ціна за одиницю.
+//РЈ РєРѕР¶РЅРѕРіРѕ С‚РѕРІР°СЂСѓ С” РЅР°СЃС‚СѓРїРЅС– РІР»Р°СЃС‚РёРІРѕСЃС‚С– - РЅР°Р·РІР°, РѕРїРёСЃ, РІРёСЂРѕР±РЅРёРє, РєС–Р»СЊРєС–СЃС‚СЊ РЅР° СЃРєР»Р°РґС–, С†С–РЅР° Р·Р° РѕРґРёРЅРёС†СЋ.
 public class Goods {
 	
 	private static int uniqueID = 1;
@@ -12,7 +12,7 @@ public class Goods {
 	private String name;
 	private String desc;
 	private String maker;
-	private String unit;		//Одиниці вимірювання товарів (кг., шт., од., і тд.)
+	private String unit;		//РћРґРёРЅРёС†С– РІРёРјС–СЂСЋРІР°РЅРЅСЏ С‚РѕРІР°СЂС–РІ (РєРі., С€С‚., РѕРґ., С– С‚Рґ.)
 	private double quantity;
 	private double price;
 	

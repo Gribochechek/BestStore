@@ -196,60 +196,60 @@ public class MainWindow extends JFrame implements ChangeListener {
 		// Buttons on Goods
 		bGroupAdd = new JButton(groupAddIcon);
 		bGroupAdd.setBounds(BUTTON_SPACE * 2, 435, 64, 64);
-		bGroupAdd.setToolTipText("Додати групу товарів");
+		bGroupAdd.setToolTipText("Add group");
 
 		bGroupEdit = new JButton(groupEditIcon);
 		bGroupEdit.setBounds(32 + 5 + BUTTON_SPACE * 2, 505, 64, 64);
-		bGroupEdit.setToolTipText("Редагувати групу товарів");
+		bGroupEdit.setToolTipText("Edit group");
 
 		bGroupRemove = new JButton(groupRemoveIcon);
 		bGroupRemove.setBounds(BUTTON_SPACE * 3 + 64, 435, 64, 64);
-		bGroupRemove.setToolTipText("Видалити групу товарів");
+		bGroupRemove.setToolTipText("Delete group");
 
 		bSubgroupAdd = new JButton(subgroupAddIcon);
 		bSubgroupAdd.setBounds(64 * 2 + BUTTON_SPACE * 6, 435, 64, 64);
-		bSubgroupAdd.setToolTipText("Додати підгрупу товарів");
+		bSubgroupAdd.setToolTipText("Add Subgroup");
 
 		bSubgroupEdit = new JButton(subgroupEditIcon);
 		bSubgroupEdit.setBounds(37 + 64 * 2 + BUTTON_SPACE * 6, 505, 64, 64);
-		bSubgroupEdit.setToolTipText("Редагувати підгрупу товарів");
+		bSubgroupEdit.setToolTipText("Edit Subgroup");
 
 		bSubgroupRemove = new JButton(subgroupRemoveIcon);
 		bSubgroupRemove.setBounds(64 * 3 + BUTTON_SPACE * 7, 435, 64, 64);
-		bSubgroupRemove.setToolTipText("Видалити підгрупу товарів");
+		bSubgroupRemove.setToolTipText("Delete Subgroup");
 
 		bGoodsAdd = new JButton(goodAddIcon);
 		bGoodsAdd.setBounds(64 * 4 + BUTTON_SPACE * 10, 435, 64, 64);
-		bGoodsAdd.setToolTipText("Додати товар");
+		bGoodsAdd.setToolTipText("Add product");
 
 		bGoodsEdit = new JButton(goodEditIcon);
 		bGoodsEdit.setBounds(37 + 64 * 4 + BUTTON_SPACE * 10, 505, 64, 64);
-		bGoodsEdit.setToolTipText("Редагувати запис про товар");
+		bGoodsEdit.setToolTipText("Edit product");
 
 		bGoodsRemove = new JButton(goodRemoveIcon);
 		bGoodsRemove.setBounds(64 * 5 + BUTTON_SPACE * 11, 435, 64, 64);
-		bGoodsRemove.setToolTipText("Видалити товар");
+		bGoodsRemove.setToolTipText("Delete product");
 
 		bSearch = new JButton(searchIcon);
 		bSearch.setBounds(64 * 6 + BUTTON_SPACE * 14, 435, 64, 64);
-		bSearch.setToolTipText("Знайти товар");
+		bSearch.setToolTipText("Find product");
 
 		bStatistic = new JButton(statisticsIcon);
 		bStatistic.setBounds(64 * 7 + BUTTON_SPACE * 15, 435, 64, 64);
-		bStatistic.setToolTipText("Показати статистику");
+		bStatistic.setToolTipText("Statistics");
 
 		// Buttons on saleGoods
 		bSaleAdd = new JButton(goodAddIcon);
 		bSaleAdd.setBounds(BUTTON_SPACE * 2, 435, 64, 64);
-		bSaleAdd.setToolTipText("Додати запис");
+		bSaleAdd.setToolTipText("Add");
 
 		bSaleRemove = new JButton(goodRemoveIcon);
 		bSaleRemove.setBounds(64 * 1 + BUTTON_SPACE * 3, 435, 64, 64);
-		bSaleRemove.setToolTipText("Видалити запис");
+		bSaleRemove.setToolTipText("Delete");
 
 		bSaleStatistic = new JButton(statisticsIcon);
 		bSaleStatistic.setBounds(64 * 2 + BUTTON_SPACE * 6, 435, 64, 64);
-		bSaleStatistic.setToolTipText("Показати статистику");
+		bSaleStatistic.setToolTipText("Statistics");
 
 		// Add tabs
 		groupsLeft.addTab("Goods", pFirstTab);
@@ -315,7 +315,7 @@ public class MainWindow extends JFrame implements ChangeListener {
 
 		// Second Tab
 		pSecondTab.setLayout(null);
-		JLabel jl2 = new JLabel("Продані товари");
+		JLabel jl2 = new JLabel("Sold products");
 		jl2.setBounds(375, 5, 150, 21);
 		jl2.setFont(new Font("Verdana", Font.BOLD, 16));
 		pSecondTab.add(jl2);
@@ -325,11 +325,11 @@ public class MainWindow extends JFrame implements ChangeListener {
 		pSecondTab.add(bSaleStatistic);
 
 		// RADIO BUTTONS on second tab
-		JLabel jl2_1 = new JLabel("Показати записи:");
+		JLabel jl2_1 = new JLabel("Show entries:");
 		jl2_1.setBounds(35, 45, 110, 21);
 		pSecondTab.add(jl2_1);
 
-		radio4 = new JRadioButton("усі");
+		radio4 = new JRadioButton("All");
 		radio4.setBounds(170, 45, 50, 23);
 		radio4.addActionListener(rbaListener);
 		pSecondTab.add(radio4);

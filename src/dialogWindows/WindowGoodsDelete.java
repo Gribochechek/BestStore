@@ -21,7 +21,7 @@ public class WindowGoodsDelete extends JDialog{
 	JButton ok, cancel;
 	JLabel title, title2, title3;
 	
-	// в конструктор передается фрейм, ид, по которому удалится объект из коллекции и имя для вывода в диалоговом окне
+	//РІ РєРѕРЅСЃС‚СЂСѓРєС‚РѕСЂ РїРµСЂРµРґР°РµС‚СЃСЏ С„СЂРµР№Рј, РёРґ, РїРѕ РєРѕС‚РѕСЂРѕРјСѓ СѓРґР°Р»РёС‚СЃСЏ РѕР±СЉРµРєС‚ РёР· РєРѕР»Р»РµРєС†РёРё Рё РёРјСЏ РґР»СЏ РІС‹РІРѕРґР° РІ РґРёР°Р»РѕРіРѕРІРѕРј РѕРєРЅРµ
 	public WindowGoodsDelete(Frame parent, int id, String nameOfGoodForDelete){
 		super(parent, true);
 		setLocation(500, 200);

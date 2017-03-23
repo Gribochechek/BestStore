@@ -130,12 +130,12 @@ public class WindowGroupDelete extends JDialog {
 				
 				   
 					result = true;
-					dispose(); // прибрати вікно
+					dispose(); 
 			}
 			
 			if (e.getSource() == cancel){
 				result = false;
-				dispose(); // прибрати вікно
+				dispose();
 			}
 			
 		}

@@ -13,8 +13,6 @@ import javax.swing.border.EmptyBorder;
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 
-//import com.jgoodies.forms.factories.DefaultComponentFactory;
-
 import main.Main;
 import objectsForStore.Goods;
 import objectsForStore.Group;
@@ -68,7 +66,7 @@ public class WindowGroupAdd extends JDialog {
 		labelGroupName.setBounds(10, 70, 100, 30);
 		getContentPane().add(labelGroupName);
 		jt_name = new JTextField();
-		jt_name.setBorder(BorderFactory.createLineBorder(Color.GRAY)); //встановлюємо сірий ободок
+		jt_name.setBorder(BorderFactory.createLineBorder(Color.GRAY)); //РІСЃС‚Р°РЅРѕРІР»СЋС”РјРѕ СЃС–СЂРёР№ РѕР±РѕРґРѕРє
 	
 		jt_name.setBounds(120, 70, 160, 25);
 		getContentPane().add(jt_name);
@@ -77,7 +75,7 @@ public class WindowGroupAdd extends JDialog {
 		labelGroupDescription.setBounds(10, 120, 100, 30);
 		getContentPane().add(labelGroupDescription);
 		jt_description = new JTextField();
-		jt_description.setBorder(BorderFactory.createLineBorder(Color.GRAY)); //встановлюємо сірий ободок
+		jt_description.setBorder(BorderFactory.createLineBorder(Color.GRAY)); //РІСЃС‚Р°РЅРѕРІР»СЋС”РјРѕ СЃС–СЂРёР№ РѕР±РѕРґРѕРє
 	
 		jt_description.setBounds(120, 120, 160, 25);
 		getContentPane().add(jt_description);
@@ -97,20 +95,20 @@ public class WindowGroupAdd extends JDialog {
 	}
 
 	public void setResult() {
-		//перевіряємо наявність у базі аналогічного найменування
+		//РїРµСЂРµРІС–СЂСЏС”РјРѕ РЅР°СЏРІРЅС–СЃС‚СЊ Сѓ Р±Р°Р·С– Р°РЅР°Р»РѕРіС–С‡РЅРѕРіРѕ РЅР°Р№РјРµРЅСѓРІР°РЅРЅСЏ
 				String temp_str = jt_name.getText().toLowerCase();
 				for (int i = 0; i < Main.mainWindow.groups.size(); i++){
 					Group group = Main.mainWindow.groups.get(i);
 					String str2 = group.getGroupName().toLowerCase();
 					if (temp_str.equals(str2)){
-						JOptionPane.showMessageDialog(null, "Запис із таким найменуванням вже існує!");
+						JOptionPane.showMessageDialog(null, "Such entry already exists!");
 						
 						return;
 					}
 				}
 					for (Subgroup sgr : Main.mainWindow.subgroups) {
 						if (temp_str.equals(sgr.getSubgroupName().toLowerCase())){
-							JOptionPane.showMessageDialog(null, "Запис із таким найменуванням вже існує!");
+							JOptionPane.showMessageDialog(null, "Such entry already exists!");
 							
 							return;
 						}
@@ -118,7 +116,7 @@ public class WindowGroupAdd extends JDialog {
 				
 				
 			
-				//если групп еще нет - приссваиваем первой ID = 1, если есть - ID последнего в списке +1
+				//РµСЃР»Рё РіСЂСѓРїРї РµС‰Рµ РЅРµС‚ - РїСЂРёСЃСЃРІР°РёРІР°РµРј РїРµСЂРІРѕР№ ID = 1, РµСЃР»Рё РµСЃС‚СЊ - ID РїРѕСЃР»РµРґРЅРµРіРѕ РІ СЃРїРёСЃРєРµ +1
 				if(Main.mainWindow.goods.size()>0){
 				group = new Group(Main.mainWindow.groups.get(Main.mainWindow.groups.size()-1).getGroupID()+1, jt_name.getText(), jt_description.getText());
 				}
@@ -145,12 +143,12 @@ public class WindowGroupAdd extends JDialog {
 				
 				else
 					result = true;
-					dispose(); // прибрати вікно
+					dispose(); 
 			}
 			
 			if (e.getSource() == cancel){
 				result = false;
-				dispose(); // прибрати вікно
+				dispose(); 
 			}
 			
 		}

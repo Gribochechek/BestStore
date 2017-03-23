@@ -56,18 +56,18 @@ public class WindowGroupEdit extends WindowGroupAdd {
 	}
 
 	public void setResult() {
-		// перевіряємо наявність у базі аналогічного найменування
+		
 		String temp_str = jt_name.getText();
 		if (!oldText.equals(temp_str)) {
 			for (Group gr : Main.mainWindow.groups) {
 				if(gr.getGroupName().toLowerCase().equals(temp_str)){
-					JOptionPane.showMessageDialog(null, "Запис із таким найменуванням вже існує!");
+					JOptionPane.showMessageDialog(null, "Such entry already exists!");
 					return;
 				}		
 			}
 			for (Subgroup gr : Main.mainWindow.subgroups) {
 				if(gr.getSubgroupName().toLowerCase().equals(temp_str)){
-					JOptionPane.showMessageDialog(null, "Запис із таким найменуванням вже існує!");
+					JOptionPane.showMessageDialog(null, "Such entry already exists!");
 					return;
 				}		
 			}

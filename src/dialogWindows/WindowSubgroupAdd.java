@@ -54,27 +54,27 @@ public class WindowSubgroupAdd extends WindowGroupAdd{
 	
 	public void setResult() {
 		
-		//перевіряємо наявність у базі аналогічного найменування
+
 		String temp_str = jt_name.getText();
 		for (int i = 0; i < Main.mainWindow.subgroups.size(); i++){
 			Subgroup group = Main.mainWindow.subgroups.get(i);
 			String str2 = group.getSubgroupName();
 			if (temp_str.equals(str2)){
-				JOptionPane.showMessageDialog(null, "Запис із таким найменуванням вже існує!");
+				JOptionPane.showMessageDialog(null, "Such entry already exists!");
 				
 				return;
 			}
 		}
 		for (Group sgr : Main.mainWindow.groups) {
 			if (temp_str.equals(sgr.getGroupName().toLowerCase())){
-				JOptionPane.showMessageDialog(null, "Запис із таким найменуванням вже існує!");
+				JOptionPane.showMessageDialog(null, "Such entry already exists!");
 				
 				return;
 			}
 		}
 		
 	
-		//если групп еще нет - приссваиваем первой ID = 1, если есть - ID последнего в списке +1
+		
 		if(Main.mainWindow.subgroups.size()>0){
 			subgroup = new Subgroup(groupID, Main.mainWindow.subgroups.get(Main.mainWindow.subgroups.size()-1).getSubgroupID()+1, jt_name.getText());
 		}

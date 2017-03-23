@@ -49,11 +49,11 @@ public class WindowGoodsEdit extends WindowGoodsAdd {
 
 	void setResult() {
 
-		// якщо аналогічного найменування не знайдено - готуємо об'єкт - новий
-		// товар
+		// СЏРєС‰Рѕ Р°РЅР°Р»РѕРіС–С‡РЅРѕРіРѕ РЅР°Р№РјРµРЅСѓРІР°РЅРЅСЏ РЅРµ Р·РЅР°Р№РґРµРЅРѕ - РіРѕС‚СѓС”РјРѕ РѕР±'С”РєС‚ - РЅРѕРІРёР№
+		// С‚РѕРІР°СЂ
 		int subgroupID = Main.mainWindow.getSubgroupIDByName((String) comboSubgroup.getSelectedItem());
 
-		// перевіряємо, чи не введено у числі випадково кому замість крапки
+		// РїРµСЂРµРІС–СЂСЏС”РјРѕ, С‡Рё РЅРµ РІРІРµРґРµРЅРѕ Сѓ С‡РёСЃР»С– РІРёРїР°РґРєРѕРІРѕ РєРѕРјСѓ Р·Р°РјС–СЃС‚СЊ РєСЂР°РїРєРё
 		String quantity = setCommas(jt_quantity.getText());
 		String price = setCommas(jt_price.getText());
 		if (price.equals(""))

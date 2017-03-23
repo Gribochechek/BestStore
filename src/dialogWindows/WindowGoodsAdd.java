@@ -47,13 +47,13 @@ public class WindowGoodsAdd extends JDialog{
 		setResizable(false);
 		getContentPane().setLayout(null);
 		
-		title = new JLabel("Add new Good №" + (Main.mainWindow.goods.size()+1));
+		title = new JLabel("Add new Good #" + (Main.mainWindow.goods.size()+1));
 		title.setHorizontalAlignment(SwingConstants.CENTER);
 		title.setFont(new Font("Times New Roman", Font.BOLD, 12));
 		title.setBounds(42, 11, 226, 30);
 		getContentPane().add (title);
 		
-		group = new JLabel("Група*:");
+		group = new JLabel("Group*:");
 		group.setBounds(START_WIDTH_POINT, START_HEIGHT_POINT, 85, ELEMENT_HEIGHT);
 		getContentPane().add(group);
 		comboGroup = new JComboBox();
@@ -63,7 +63,7 @@ public class WindowGoodsAdd extends JDialog{
 		comboGroup.addActionListener(available_handler);
 		getContentPane().add(comboGroup);
 		
-		subgroup = new JLabel("Підгрупа*:");
+		subgroup = new JLabel("Subgroup*:");
 		subgroup.setBounds(START_WIDTH_POINT, START_HEIGHT_POINT+ELEMENT_HEIGHT+SPACE, 
 				85, ELEMENT_HEIGHT);
 		getContentPane().add(subgroup);
@@ -73,32 +73,32 @@ public class WindowGoodsAdd extends JDialog{
 		comboSubgroup.setBounds(124, START_HEIGHT_POINT+ELEMENT_HEIGHT+SPACE-3, 146, TEXTFIELD_HEIGHT);
 		getContentPane().add(comboSubgroup);
 		
-		name = new JLabel("Найменування*:");
+		name = new JLabel("Name*:");
 		name.setBounds(START_WIDTH_POINT, START_HEIGHT_POINT+ELEMENT_HEIGHT*2+SPACE*2, 
 				100, ELEMENT_HEIGHT);
 		getContentPane().add(name);
 		jt_name = new JTextArea();
-		jt_name.setBorder(BorderFactory.createLineBorder(Color.GRAY)); //встановлюємо сірий ободок
+		jt_name.setBorder(BorderFactory.createLineBorder(Color.GRAY)); //РІСЃС‚Р°РЅРѕРІР»СЋС”РјРѕ СЃС–СЂРёР№ РѕР±РѕРґРѕРє
 		jt_name.setWrapStyleWord(true);
 		jt_name.setRows(3);
-		jt_name.setLineWrap(true); //переносить текст на наступний рядок
+		jt_name.setLineWrap(true); //РїРµСЂРµРЅРѕСЃРёС‚СЊ С‚РµРєСЃС‚ РЅР° РЅР°СЃС‚СѓРїРЅРёР№ СЂСЏРґРѕРє
 		jt_name.setBounds(126, START_HEIGHT_POINT+ELEMENT_HEIGHT*2+SPACE*2, 142, 49);
 		getContentPane().add(jt_name);
 		
-		description = new JLabel("Опис");
+		description = new JLabel("Description:");
 		description.setBounds(START_WIDTH_POINT, START_HEIGHT_POINT+ELEMENT_HEIGHT*5+SPACE*3, 
 				85, 14);
 		getContentPane().add(description);
 		jt_description = new JTextArea();
-		jt_description.setBorder(BorderFactory.createLineBorder(Color.GRAY)); //встановлюємо сірий ободок
+		jt_description.setBorder(BorderFactory.createLineBorder(Color.GRAY)); //РІСЃС‚Р°РЅРѕРІР»СЋС”РјРѕ СЃС–СЂРёР№ РѕР±РѕРґРѕРє
 		jt_description.setWrapStyleWord(true);
 		jt_description.setRows(3);
-		jt_description.setLineWrap(true); //переносить текст на наступний рядок
+		jt_description.setLineWrap(true); //РїРµСЂРµРЅРѕСЃРёС‚СЊ С‚РµРєСЃС‚ РЅР° РЅР°СЃС‚СѓРїРЅРёР№ СЂСЏРґРѕРє
 		jt_description.setBounds(126, START_HEIGHT_POINT+ELEMENT_HEIGHT*5+SPACE*3, 142, 49);
 		getContentPane().add(jt_description);
 
 		
-		producer = new JLabel("Виробник:");
+		producer = new JLabel("Manufacturer:");
 		producer.setBounds(START_WIDTH_POINT, START_HEIGHT_POINT+ELEMENT_HEIGHT*8+SPACE*4, 
 				85, 14);
 		getContentPane().add(producer);
@@ -107,7 +107,7 @@ public class WindowGoodsAdd extends JDialog{
 				146, TEXTFIELD_HEIGHT);
 		getContentPane().add(jt_producer);
 		
-		price = new JLabel("Ціна, грн");
+		price = new JLabel("Price, uah");
 		price.setBounds(START_WIDTH_POINT, START_HEIGHT_POINT+ELEMENT_HEIGHT*9+SPACE*5,
 				60, 14);
 		getContentPane().add(price);
@@ -116,7 +116,7 @@ public class WindowGoodsAdd extends JDialog{
 				146, TEXTFIELD_HEIGHT);
 		getContentPane().add(jt_price);
 		
-		quantity = new JLabel("Кількість*:");
+		quantity = new JLabel("Quantity*:");
 		quantity.setBounds(START_WIDTH_POINT, START_HEIGHT_POINT+ELEMENT_HEIGHT*10+SPACE*6, 
 				90, 14);
 		getContentPane().add(quantity);
@@ -125,7 +125,7 @@ public class WindowGoodsAdd extends JDialog{
 				146, TEXTFIELD_HEIGHT);
 		getContentPane().add(jt_quantity);
 		
-		measureType = new JLabel("Одиниця виміру*:");
+		measureType = new JLabel("Measurement*:");
 		measureType.setBounds(START_WIDTH_POINT, START_HEIGHT_POINT+ELEMENT_HEIGHT*11+SPACE*7, 
 				100, 14);
 		getContentPane().add(measureType);
@@ -140,7 +140,7 @@ public class WindowGoodsAdd extends JDialog{
 		ok.addActionListener(available_handler);
 		Main.mainWindow.goodsTable.updateUI();
 		
-		cancel = new JButton ("Скасувати");
+		cancel = new JButton ("Cancel");
 		cancel.setBounds(160, 367, 100, 23);
 		getContentPane().add(cancel);
 		cancel.addActionListener(available_handler);
@@ -152,33 +152,33 @@ public class WindowGoodsAdd extends JDialog{
 			
 			if (e.getSource() == ok){
 				if (jt_name.getText().equals("")) {
-					JOptionPane.showMessageDialog(null, "Введіть дані в поле \"Найменування\"");
+					JOptionPane.showMessageDialog(null, "Invalid Name format");
 					return;
 				}
 				if (jt_quantity.getText().equals("")) {
-					JOptionPane.showMessageDialog(null, "Введіть дані в поле \"Кількість\"");
+					JOptionPane.showMessageDialog(null, "Invalid Quantity format");
 					return;
 				}
 				if (jt_measureType.getText().equals("")) {
-					JOptionPane.showMessageDialog(null, "Введіть дані в поле \"Одиниця виміру\"");
+					JOptionPane.showMessageDialog(null, "Invalid Measurement format");
 					return;
 				}
 				if (!isDouble(jt_price.getText())) {
-					JOptionPane.showMessageDialog(null, "Invalid price format");
+					JOptionPane.showMessageDialog(null, "Invalid Price format");
 					return;
 				}
 				if (!isDouble(jt_quantity.getText())) {
-					JOptionPane.showMessageDialog(null, "Invalid quantity format");
+					JOptionPane.showMessageDialog(null, "Invalid Quantity format");
 					return;
 				}
 				
 				else
 					setResult();
-					dispose(); // прибрати вікно
+					dispose(); // РїСЂРёР±СЂР°С‚Рё РІС–РєРЅРѕ
 			}
 			
 			if (e.getSource() == cancel){
-				dispose(); // прибрати вікно
+				dispose(); // РїСЂРёР±СЂР°С‚Рё РІС–РєРЅРѕ
 			}
 			
 			if (e.getSource() == comboGroup){
@@ -188,7 +188,7 @@ public class WindowGoodsAdd extends JDialog{
 		}
 	}
 	
-	//метод замінює введені коми на точки (потрібно для чисел double)
+	//РјРµС‚РѕРґ Р·Р°РјС–РЅСЋС” РІРІРµРґРµРЅС– РєРѕРјРё РЅР° С‚РѕС‡РєРё (РїРѕС‚СЂС–Р±РЅРѕ РґР»СЏ С‡РёСЃРµР» double)
 	String setCommas(String str){
 		if (str.contains(","))
 			str = str.replace (",", ".");
@@ -196,26 +196,26 @@ public class WindowGoodsAdd extends JDialog{
 	}
 	
 	void setResult(){
-		//перевіряємо наявність у базі аналогічного найменування
+		//РїРµСЂРµРІС–СЂСЏС”РјРѕ РЅР°СЏРІРЅС–СЃС‚СЊ Сѓ Р±Р°Р·С– Р°РЅР°Р»РѕРіС–С‡РЅРѕРіРѕ РЅР°Р№РјРµРЅСѓРІР°РЅРЅСЏ
 		String temp_str = jt_name.getText();
 		for (int i = 0; i < Main.mainWindow.goods.size(); i++){
 			Goods goods = Main.mainWindow.goods.get(i);
 			String str2 = goods.getName();
 			if (temp_str.equals(str2)){
-				JOptionPane.showMessageDialog(null, "Запис із таким найменуванням вже існує!");
-				Main.mainWindow.goodsTable.setRowSelectionInterval(i, i); //виділяємо рядок з аналогічним найменуванням
+				JOptionPane.showMessageDialog(null, "Such entry already exists!");
+				Main.mainWindow.goodsTable.setRowSelectionInterval(i, i); //РІРёРґС–Р»СЏС”РјРѕ СЂСЏРґРѕРє Р· Р°РЅР°Р»РѕРіС–С‡РЅРёРј РЅР°Р№РјРµРЅСѓРІР°РЅРЅСЏРј
 				return;
 			}
 		}
 		
-		//якщо аналогічного найменування не знайдено - готуємо об'єкт - новий товар
+		//СЏРєС‰Рѕ Р°РЅР°Р»РѕРіС–С‡РЅРѕРіРѕ РЅР°Р№РјРµРЅСѓРІР°РЅРЅСЏ РЅРµ Р·РЅР°Р№РґРµРЅРѕ - РіРѕС‚СѓС”РјРѕ РѕР±'С”РєС‚ - РЅРѕРІРёР№ С‚РѕРІР°СЂ
 		int subgroupID = Main.mainWindow.getSubgroupIDByName((String) comboSubgroup.getSelectedItem());
 		
-		//перевіряємо, чи не введено у числі випадково кому замість крапки
+		//РїРµСЂРµРІС–СЂСЏС”РјРѕ, С‡Рё РЅРµ РІРІРµРґРµРЅРѕ Сѓ С‡РёСЃР»С– РІРёРїР°РґРєРѕРІРѕ РєРѕРјСѓ Р·Р°РјС–СЃС‚СЊ РєСЂР°РїРєРё
 		String quantity = setCommas(jt_quantity.getText());
 		String price = setCommas(jt_price.getText());
 		if (price.equals("")) price = "0";
-		//если товаров еще нет - приссваиваем первому ID = 1, если есть - ID последнего в списке +1
+		//РµСЃР»Рё С‚РѕРІР°СЂРѕРІ РµС‰Рµ РЅРµС‚ - РїСЂРёСЃСЃРІР°РёРІР°РµРј РїРµСЂРІРѕРјСѓ ID = 1, РµСЃР»Рё РµСЃС‚СЊ - ID РїРѕСЃР»РµРґРЅРµРіРѕ РІ СЃРїРёСЃРєРµ +1
 		if(Main.mainWindow.goods.size()>0){
 		product = new Goods(Main.mainWindow.goods.get(Main.mainWindow.goods.size()-1).getID()+1, subgroupID, jt_name.getText(), jt_description.getText(), jt_producer.getText(), 
 				Double.parseDouble(quantity), Double.parseDouble(price), jt_measureType.getText());
