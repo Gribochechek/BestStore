@@ -5,6 +5,7 @@ import java.awt.Color;
 import java.awt.FlowLayout;
 
 import javax.swing.BorderFactory;
+import javax.swing.DefaultComboBoxModel;
 import javax.swing.JButton;
 import javax.swing.JDialog;
 import javax.swing.JPanel;
@@ -15,9 +16,14 @@ import javax.swing.JOptionPane;
 //import com.jgoodies.forms.factories.DefaultComponentFactory;
 
 import main.Main;
+import objectsForStore.Goods;
 import objectsForStore.Group;
+import objectsForStore.Subgroup;
+import streams.GoodsWriter;
+import streams.GroupsWriter;
 
 import javax.swing.JTextArea;
+import javax.swing.JTextField;
 import javax.swing.SwingConstants;
 
 import java.awt.Font;
@@ -28,87 +34,126 @@ import java.io.IOException;
 
 import javax.swing.border.LineBorder;
 
+import dialogWindows.WindowGoodsAdd.eHandler;
+
 public class WindowGroupAdd extends JDialog {
 
 	private final JPanel contentPanel = new JPanel();
 	
 	public boolean result;
 	
-	JButton okButton, cancelButton;
+	JButton ok, cancel;
 	JPanel buttonPane;
-	JTextArea groupName;
-	JLabel titleGroup, labelGroupName;
-	Listener okCancel = new Listener(); 
-	
+	JTextField jt_name, jt_description;
+	JLabel title, labelGroupName, labelGroupDescription;
+	eHandler available_handler = new eHandler();
+	Group group;
+	GroupsWriter gw = new GroupsWriter();
 
 	public WindowGroupAdd(Frame parent) {
-		
-		super(parent, true);		
-		
-		titleGroup = new JLabel("Додати нову групу товарів");
-		titleGroup.setHorizontalAlignment(SwingConstants.CENTER); //розташовуємо напис по центру
-		titleGroup.setFont(new Font("Verdana", Font.BOLD, 12));
-		titleGroup.setBounds(42, 11, 226, 28);
-		getContentPane().add (titleGroup);
-		
-		setAlwaysOnTop(true);
-		setDefaultCloseOperation(JDialog.DISPOSE_ON_CLOSE);
+				
+		super(parent, true);
+		setLocation(500, 200);
+		setSize(300, 260);
 		setResizable(false);
-		setBounds(100, 100, 450, 300);
-		getContentPane().setLayout(new BorderLayout());
-		contentPanel.setLayout(new FlowLayout());
-		contentPanel.setBorder(new LineBorder(Color.GRAY));
-		getContentPane().add(contentPanel, BorderLayout.CENTER);
-		{
-			labelGroupName = new JLabel("Type group name:");
-			labelGroupName.setFont(new Font("Tahoma", Font.PLAIN, 21));
-			contentPanel.add(labelGroupName);
-		}
-		{
-			groupName = new JTextArea();
-			groupName.setRows(10);
-			groupName.setColumns(20);
-			groupName.setBounds(126, 63, 142, 49);
-			groupName.setBorder(BorderFactory.createLineBorder(Color.GRAY));
-			contentPanel.add(groupName);
-		}
-		{
-			buttonPane = new JPanel();
-			buttonPane.setLayout(new FlowLayout(FlowLayout.CENTER));
-			getContentPane().add(buttonPane, BorderLayout.SOUTH);
-			{
-				okButton = new JButton("OK");
-				okButton.setToolTipText("Confirm");
-				buttonPane.add(okButton);
-				okButton.addActionListener(okCancel);
-			}
-			{
-				cancelButton = new JButton("Cancel");
-				cancelButton.setToolTipText("Cancel");
-				cancelButton.setActionCommand("Cancel");
-				buttonPane.add(cancelButton);
-				cancelButton.addActionListener(okCancel);
-			}
-		}
-	}
+		getContentPane().setLayout(null);
+		
+		title = new JLabel("Add new Group");
+		title.setHorizontalAlignment(SwingConstants.CENTER);
+		title.setFont(new Font("Times New Roman", Font.BOLD, 12));
+		title.setBounds(100, 8, 100, 30);
+		getContentPane().add (title);
+		
+		labelGroupName = new JLabel("Group Name*:");
+		labelGroupName.setBounds(10, 70, 100, 30);
+		getContentPane().add(labelGroupName);
+		jt_name = new JTextField();
+		jt_name.setBorder(BorderFactory.createLineBorder(Color.GRAY)); //встановлюємо сірий ободок
 	
-	class Listener implements ActionListener{
-		public void actionPerformed(ActionEvent ae) {
-			
-			if (ae.getSource() == okButton){
-				result = true;
-				dispose();
-			}
-			
-			if (ae.getSource() == cancelButton){
-				result = false;
-				dispose();
-			}
-		}
+		jt_name.setBounds(120, 70, 160, 25);
+		getContentPane().add(jt_name);
+		
+		labelGroupDescription = new JLabel("Description:");
+		labelGroupDescription.setBounds(10, 120, 100, 30);
+		getContentPane().add(labelGroupDescription);
+		jt_description = new JTextField();
+		jt_description.setBorder(BorderFactory.createLineBorder(Color.GRAY)); //встановлюємо сірий ободок
+	
+		jt_description.setBounds(120, 120, 160, 25);
+		getContentPane().add(jt_description);
+		
+		
+		ok = new JButton ("OK");
+		ok.setBounds(30, 190, 100, 23);
+		getContentPane().add(ok);
+		ok.addActionListener(available_handler);
+		Main.mainWindow.goodsTable.updateUI();
+		
+		cancel = new JButton ("Cancel");
+		cancel.setBounds(160, 190, 100, 23);
+		getContentPane().add(cancel);
+		cancel.addActionListener(available_handler);
+		
 	}
 
 	public void setResult() {
-		//Тут має щось бути
+		//перевіряємо наявність у базі аналогічного найменування
+				String temp_str = jt_name.getText().toLowerCase();
+				for (int i = 0; i < Main.mainWindow.groups.size(); i++){
+					Group group = Main.mainWindow.groups.get(i);
+					String str2 = group.getGroupName().toLowerCase();
+					if (temp_str.equals(str2)){
+						JOptionPane.showMessageDialog(null, "Запис із таким найменуванням вже існує!");
+						
+						return;
+					}
+				}
+					for (Subgroup sgr : Main.mainWindow.subgroups) {
+						if (temp_str.equals(sgr.getSubgroupName().toLowerCase())){
+							JOptionPane.showMessageDialog(null, "Запис із таким найменуванням вже існує!");
+							
+							return;
+						}
+					}
+				
+				
+			
+				//если групп еще нет - приссваиваем первой ID = 1, если есть - ID последнего в списке +1
+				if(Main.mainWindow.goods.size()>0){
+				group = new Group(Main.mainWindow.groups.get(Main.mainWindow.groups.size()-1).getGroupID()+1, jt_name.getText(), jt_description.getText());
+				}
+				else{
+					group = new Group(1, jt_name.getText(), jt_description.getText());
+				}
+				Main.mainWindow.groups.add(group);
+				
+				
+				gw.saveGroupsInFile(Main.mainWindow.groups);
+		
+		
+	
+	}
+	
+	public class eHandler implements ActionListener{
+		public void actionPerformed(ActionEvent e) {
+			
+			if (e.getSource() == ok){
+				if (jt_name.getText().equals("")) {
+					JOptionPane.showMessageDialog(null, "Invalid Name format");
+					return;
+				}
+				
+				else
+					result = true;
+					dispose(); // прибрати вікно
+			}
+			
+			if (e.getSource() == cancel){
+				result = false;
+				dispose(); // прибрати вікно
+			}
+			
+		}
 	}
 
 }

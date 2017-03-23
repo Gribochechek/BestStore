@@ -438,6 +438,8 @@ public class MainWindow extends JFrame implements ChangeListener {
 		}
 		return -1;
 	}
+	
+
 
 	public void stateChanged(ChangeEvent arg0) {}
 }

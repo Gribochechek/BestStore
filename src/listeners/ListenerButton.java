@@ -12,8 +12,12 @@ import dialogWindows.WindowGoodsDelete;
 import dialogWindows.WindowGoodsEdit;
 import dialogWindows.WindowGroupAdd;
 import dialogWindows.WindowGroupDelete;
+import dialogWindows.WindowGroupEdit;
 import dialogWindows.WindowSearch;
 import dialogWindows.WindowStatisticGoods;
+import dialogWindows.WindowSubgroupAdd;
+import dialogWindows.WindowSubgroupDelete;
+import dialogWindows.WindowSubgroupEdit;
 import main.Main;
 
 public class ListenerButton implements ActionListener {
@@ -29,6 +33,63 @@ public class ListenerButton implements ActionListener {
 				Main.mainWindow.refreshComboBoxes();
 			}
 		}
+		
+		if (e.getSource() == Main.mainWindow.bGroupEdit) {
+			WindowGroupEdit dialog = new WindowGroupEdit(Main.mainWindow);
+			dialog.setVisible(true);
+			dialog.setDefaultCloseOperation(WindowConstants.DISPOSE_ON_CLOSE);
+			if (dialog.result == true) {
+				dialog.setResult();
+				Main.mainWindow.refreshComboBoxes();
+			}
+		}
+		
+		if (e.getSource() == Main.mainWindow.bGroupRemove) {
+			WindowGroupDelete dialog = new WindowGroupDelete(Main.mainWindow);
+			dialog.setVisible(true);
+			dialog.setDefaultCloseOperation(WindowConstants.DISPOSE_ON_CLOSE);
+			if (dialog.result == true) {
+				
+				dialog.setResult();
+				Main.mainWindow.refreshComboBoxes();
+				Main.mainWindow.goodsTable.updateUI();
+				
+			}
+		}
+		
+		if (e.getSource() == Main.mainWindow.bSubgroupAdd) {
+			WindowSubgroupAdd dialog = new WindowSubgroupAdd(Main.mainWindow);
+			dialog.setVisible(true);
+			dialog.setDefaultCloseOperation(WindowConstants.DISPOSE_ON_CLOSE);
+			if (dialog.result == true) {
+				dialog.setResult();
+				Main.mainWindow.refreshComboBoxes();
+				Main.mainWindow.goodsTable.updateUI();
+			}
+		}
+		
+		if (e.getSource() == Main.mainWindow.bSubgroupEdit) {
+			WindowSubgroupEdit dialog = new WindowSubgroupEdit(Main.mainWindow);
+			dialog.setVisible(true);
+			dialog.setDefaultCloseOperation(WindowConstants.DISPOSE_ON_CLOSE);
+			if (dialog.result == true) {
+				dialog.setResult();
+				Main.mainWindow.refreshComboBoxes();
+				Main.mainWindow.goodsTable.updateUI();
+			}
+		}
+		
+		if (e.getSource() == Main.mainWindow.bSubgroupRemove) {
+			WindowSubgroupDelete dialog = new WindowSubgroupDelete(Main.mainWindow);
+			dialog.setVisible(true);
+			dialog.setDefaultCloseOperation(WindowConstants.DISPOSE_ON_CLOSE);
+			if (dialog.result == true) {
+				dialog.setResult();
+				Main.mainWindow.refreshComboBoxes();
+				Main.mainWindow.goodsTable.updateUI();
+			}
+		}
+		
 
 		if (e.getSource() == Main.mainWindow.bGoodsAdd) {
 			WindowGoodsAdd dialog = new WindowGoodsAdd(Main.mainWindow);
