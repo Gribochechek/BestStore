@@ -6,6 +6,8 @@ import java.awt.Font;
 import java.awt.Point;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
+import java.awt.event.WindowEvent;
+import java.awt.event.WindowListener;
 import java.io.IOException;
 import java.util.ArrayList;
 
@@ -17,6 +19,7 @@ import javax.swing.JButton;
 import javax.swing.JComboBox;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JRadioButton;
 import javax.swing.JScrollPane;
@@ -31,6 +34,7 @@ import javax.swing.table.TableModel;
 
 import listeners.ListenerButton;
 import listeners.RadioButtonListener;
+import main.Main;
 import objectsForStore.Goods;
 import objectsForStore.Group;
 import objectsForStore.SaleGoods;
@@ -61,7 +65,7 @@ public class MainWindow extends JFrame implements ChangeListener {
 	public JButton bGroupEdit;
 	public JButton bSubgroupAdd, bSubgroupRemove, bSubgroupEdit;
 	public JButton bSearch, bStatistic;
-	public JButton bSaleAdd, bSaleRemove, bSaleStatistic;
+	public JButton bSaleEdit, bSaleRemove, bSaleStatistic;
 	public JRadioButton radio1, radio2, radio3, radio4, radio5, radio6;
 
 	// --------------------------------------------------------------
@@ -192,6 +196,8 @@ public class MainWindow extends JFrame implements ChangeListener {
 
 		Icon searchIcon = new ImageIcon("images\\Search.png");
 		Icon statisticsIcon = new ImageIcon("images\\Statistic.png");
+		
+		Icon really = new ImageIcon("images\\Really.png");
 
 		// Buttons on Goods
 		bGroupAdd = new JButton(groupAddIcon);
@@ -239,9 +245,9 @@ public class MainWindow extends JFrame implements ChangeListener {
 		bStatistic.setToolTipText("Statistics");
 
 		// Buttons on saleGoods
-		bSaleAdd = new JButton(goodAddIcon);
-		bSaleAdd.setBounds(BUTTON_SPACE * 2, 435, 64, 64);
-		bSaleAdd.setToolTipText("Add");
+		bSaleEdit = new JButton(goodAddIcon);
+		bSaleEdit.setBounds(BUTTON_SPACE * 2, 435, 64, 64);
+		bSaleEdit.setToolTipText("Add");
 
 		bSaleRemove = new JButton(goodRemoveIcon);
 		bSaleRemove.setBounds(64 * 1 + BUTTON_SPACE * 3, 435, 64, 64);
@@ -317,10 +323,10 @@ public class MainWindow extends JFrame implements ChangeListener {
 		pSecondTab.setLayout(null);
 		JLabel jl2 = new JLabel("Sold products");
 		jl2.setBounds(375, 5, 150, 21);
-		jl2.setFont(new Font("Verdana", Font.BOLD, 16));
+		jl2.setFont(new Font("Times New Roman", Font.BOLD, 16));
 		pSecondTab.add(jl2);
 		pSecondTab.add(jsp2);
-		pSecondTab.add(bSaleAdd);
+		pSecondTab.add(bSaleEdit);
 		pSecondTab.add(bSaleRemove);
 		pSecondTab.add(bSaleStatistic);
 
@@ -346,13 +352,38 @@ public class MainWindow extends JFrame implements ChangeListener {
 		bGoodsRemove.addActionListener(aListener);
 		bSearch.addActionListener(aListener);
 		bStatistic.addActionListener(aListener);
-		bSaleAdd.addActionListener(aListener);
+		bSaleEdit.addActionListener(aListener);
 		bSaleRemove.addActionListener(aListener);
 		bSaleStatistic.addActionListener(aListener);
 		
 		groupsLeft.addChangeListener(this);
+		
+		//Adding Window Listener
+		addWindowListener(new WindowListener() {
+			public void windowActivated(WindowEvent event) {}
+            
+			public void windowClosed(WindowEvent event) {}
+            
+			public void windowClosing(WindowEvent event) {
+                Object[] options = { "Yes", "No" };
+                JOptionPane.showOptionDialog(event.getWindow(), "Exit program?",
+                                "Confirmation", JOptionPane.YES_NO_OPTION,
+                                JOptionPane.QUESTION_MESSAGE, really, options,
+                                options[0]);
+            }
+ 
+            public void windowDeactivated(WindowEvent event) {}
+ 
+            public void windowDeiconified(WindowEvent event) {}
+ 
+            public void windowIconified(WindowEvent event) {}
+ 
+            public void windowOpened(WindowEvent event) {}
+ 
+        });
+ }
 
-	}
+
 
 	public void setColumnWidth(JTable goodsTable2, int[] is) {
 		for (int i = 0; i < is.length; i++)
@@ -442,4 +473,5 @@ public class MainWindow extends JFrame implements ChangeListener {
 
 
 	public void stateChanged(ChangeEvent arg0) {}
+
 }

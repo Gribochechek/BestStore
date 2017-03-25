@@ -1,0 +1,6 @@
+1|1|Lenovo IdeaPad 110-15IBR (80T7004TRA) Black|ноутбук|Lenovo|psc|10.0|2656.0|
+2|1|Asus VivoBook Max X541SA (X541SA-XO041D) Black|ноутбук|Asus|psc|10.0|2656.0|
+3|1|Dell Inspiron 3552 (I35P45DIL-K1) Black|ноутбук|Dell|psc|10.0|2656.0|
+4|2|Lenovo Tab 2 A10-70L 32GB LTE Blue|Планшет|Lenovo|psc|10.0|2656.0|
+5|2|Assistant AP-115G IPS HD Black|Планшет|Assistant|psc|10.0|2656.0|
+6|2|Assistant AP-115G|Планшет|Assistant|psc|10.0|2656.0|

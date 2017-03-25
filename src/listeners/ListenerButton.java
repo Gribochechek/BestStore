@@ -15,6 +15,7 @@ import dialogWindows.WindowGroupDelete;
 import dialogWindows.WindowGroupEdit;
 import dialogWindows.WindowSearch;
 import dialogWindows.WindowStatisticGoods;
+import dialogWindows.WindowStatisticSaleGoods;
 import dialogWindows.WindowSubgroupAdd;
 import dialogWindows.WindowSubgroupDelete;
 import dialogWindows.WindowSubgroupEdit;
@@ -143,6 +144,43 @@ public class ListenerButton implements ActionListener {
 
 		}
 		
+		if (e.getSource() == Main.mainWindow.bSaleEdit) {
+			if (Main.mainWindow.saleGoodsTable.getSelectedRow() >= 0) {
+				int idOfDeleteProduct = (int) Main.mainWindow.saleGoodsTable
+						.getValueAt(Main.mainWindow.saleGoodsTable.getSelectedRow(), 0);
+				
+				WindowGoodsEdit dialog = new WindowGoodsEdit(Main.mainWindow, idOfDeleteProduct); 
+				dialog.setVisible(true);
+				dialog.setDefaultCloseOperation(WindowConstants.DISPOSE_ON_CLOSE);
+			}
+			else{
+				JOptionPane.showMessageDialog(Main.mainWindow, "No items selected");
+			}
+
+		}
+		
+		if (e.getSource() == Main.mainWindow.bSaleRemove) {
+			if (Main.mainWindow.saleGoodsTable.getSelectedRow() >= 0) {
+				int idOfDeleteProduct = (int) Main.mainWindow.saleGoodsTable
+						.getValueAt(Main.mainWindow.saleGoodsTable.getSelectedRow(), 0);
+				String nameOfDeleteProduct = (String) Main.mainWindow.saleGoodsTable
+						.getValueAt(Main.mainWindow.saleGoodsTable.getSelectedRow(), 1);
+				WindowGoodsDelete dialog = new WindowGoodsDelete(Main.mainWindow, idOfDeleteProduct,
+						nameOfDeleteProduct); 
+				dialog.setVisible(true);
+				dialog.setDefaultCloseOperation(WindowConstants.DISPOSE_ON_CLOSE);
+			}
+			else{
+				JOptionPane.showMessageDialog(Main.mainWindow, "No items selected");
+			}
+		}
+		
+		if (e.getSource() == Main.mainWindow.bSaleStatistic) {
+			WindowStatisticSaleGoods dialog = new WindowStatisticSaleGoods(Main.mainWindow);
+			dialog.setVisible(true);
+			dialog.setDefaultCloseOperation(WindowConstants.DISPOSE_ON_CLOSE);
+
+		}
 
 	}
 
