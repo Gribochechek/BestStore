@@ -13,6 +13,8 @@ import dialogWindows.WindowGoodsEdit;
 import dialogWindows.WindowGroupAdd;
 import dialogWindows.WindowGroupDelete;
 import dialogWindows.WindowGroupEdit;
+import dialogWindows.WindowReturn;
+import dialogWindows.WindowSale;
 import dialogWindows.WindowSearch;
 import dialogWindows.WindowStatisticGoods;
 import dialogWindows.WindowStatisticSaleGoods;
@@ -20,6 +22,8 @@ import dialogWindows.WindowSubgroupAdd;
 import dialogWindows.WindowSubgroupDelete;
 import dialogWindows.WindowSubgroupEdit;
 import main.Main;
+import objectsForStore.Goods;
+import objectsForStore.SaleGoods;
 
 public class ListenerButton implements ActionListener {
 
@@ -53,6 +57,8 @@ public class ListenerButton implements ActionListener {
 				
 				dialog.setResult();
 				Main.mainWindow.refreshComboBoxes();
+				Main.mainWindow.radio1.setSelected(true);
+				Main.mainWindow.goodsTable.setModel(Main.mainWindow.goodsModel);
 				Main.mainWindow.goodsTable.updateUI();
 				
 			}
@@ -87,6 +93,8 @@ public class ListenerButton implements ActionListener {
 			if (dialog.result == true) {
 				dialog.setResult();
 				Main.mainWindow.refreshComboBoxes();
+				Main.mainWindow.radio1.setSelected(true);
+				Main.mainWindow.goodsTable.setModel(Main.mainWindow.goodsModel);
 				Main.mainWindow.goodsTable.updateUI();
 			}
 		}
@@ -144,12 +152,14 @@ public class ListenerButton implements ActionListener {
 
 		}
 		
-		if (e.getSource() == Main.mainWindow.bSaleEdit) {
-			if (Main.mainWindow.saleGoodsTable.getSelectedRow() >= 0) {
-				int idOfDeleteProduct = (int) Main.mainWindow.saleGoodsTable
-						.getValueAt(Main.mainWindow.saleGoodsTable.getSelectedRow(), 0);
-				
-				WindowGoodsEdit dialog = new WindowGoodsEdit(Main.mainWindow, idOfDeleteProduct); 
+		if (e.getSource() == Main.mainWindow.bSale) {
+			if (Main.mainWindow.goodsTable.getSelectedRow() >= 0) {
+				int idOfSaleProduct = (int) Main.mainWindow.goodsTable
+						.getValueAt(Main.mainWindow.goodsTable.getSelectedRow(), 0);
+				String nameOfSaleProduct = (String) Main.mainWindow.goodsTable
+						.getValueAt(Main.mainWindow.goodsTable.getSelectedRow(), 1);
+				WindowSale dialog = new WindowSale(Main.mainWindow, idOfSaleProduct,
+						nameOfSaleProduct); 
 				dialog.setVisible(true);
 				dialog.setDefaultCloseOperation(WindowConstants.DISPOSE_ON_CLOSE);
 			}
@@ -159,14 +169,21 @@ public class ListenerButton implements ActionListener {
 
 		}
 		
+		
+	
+		
 		if (e.getSource() == Main.mainWindow.bSaleRemove) {
 			if (Main.mainWindow.saleGoodsTable.getSelectedRow() >= 0) {
-				int idOfDeleteProduct = (int) Main.mainWindow.saleGoodsTable
-						.getValueAt(Main.mainWindow.saleGoodsTable.getSelectedRow(), 0);
-				String nameOfDeleteProduct = (String) Main.mainWindow.saleGoodsTable
+				int idOfReturnProduct=0;
+				int index = Main.mainWindow.saleGoodsTable.getSelectedRow();
+				String nameOfReturnProduct = (String) Main.mainWindow.saleGoodsTable
 						.getValueAt(Main.mainWindow.saleGoodsTable.getSelectedRow(), 1);
-				WindowGoodsDelete dialog = new WindowGoodsDelete(Main.mainWindow, idOfDeleteProduct,
-						nameOfDeleteProduct); 
+				for (Goods g : Main.mainWindow.goods) {
+					if(nameOfReturnProduct.equals(g.getName()))
+						idOfReturnProduct = g.getID();
+				}
+				
+				WindowReturn dialog = new WindowReturn(Main.mainWindow, idOfReturnProduct, index); 
 				dialog.setVisible(true);
 				dialog.setDefaultCloseOperation(WindowConstants.DISPOSE_ON_CLOSE);
 			}

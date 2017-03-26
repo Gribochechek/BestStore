@@ -26,12 +26,12 @@ public class RadioButtonListener implements ActionListener {
 		}
 
 		// Show all sale goods
-		if (Main.mainWindow.radio4.isSelected()) {
+/*		if (Main.mainWindow.radio4.isSelected()) {
 			Main.mainWindow.saleGoodsTable.setModel(Main.mainWindow.saleGoodsModel);
 			Main.mainWindow.setColumnWidth(Main.mainWindow.saleGoodsTable,
 					new int[] { 25, 5, 150, 10, 180, 10, 10, 10 });
 		}
-
+*/
 		// Show goods of subgroup
 		if (Main.mainWindow.radio3.isSelected() | e.getSource() == Main.mainWindow.comboSubgroup) {
 			Main.mainWindow.radio3.setSelected(true);

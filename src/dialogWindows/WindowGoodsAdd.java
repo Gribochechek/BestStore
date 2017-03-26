@@ -35,7 +35,7 @@ public class WindowGoodsAdd extends JDialog{
 	JTextArea jt_name, jt_description;
 	eHandler available_handler = new eHandler();
 	Goods product;
-	SaleGoods product2;
+	
 	
 	public WindowGoodsAdd(Frame parent) {
 		super(parent, true);
@@ -229,19 +229,7 @@ public class WindowGoodsAdd extends JDialog{
 		
 		Main.mainWindow.goodsTable.updateUI();
 		
-		//Second Tab (Sale Goods)
-		if(Main.mainWindow.saleGoods.size()>0){
-			product2 = new SaleGoods(Main.mainWindow.saleGoods.get(Main.mainWindow.saleGoods.size()-1).getSaleGoodsID()+1, jt_name.getText(), Double.parseDouble(quantity), Double.parseDouble(price));
-			}
-			else{
-				product2 = new SaleGoods(1, jt_name.getText(), Double.parseDouble(quantity), Double.parseDouble(price));
-			}
-			Main.mainWindow.saleGoods.add(product2);
-			SaleGoodsWriter sgw = new SaleGoodsWriter();
-			sgw.saveSaleGoodsInFile(Main.mainWindow.saleGoods);
-			
-			
-			Main.mainWindow.saleGoodsTable.updateUI();
+		
 	}
 	
 	

@@ -63,7 +63,10 @@ public class WindowGoodsDelete extends JDialog{
 				
 				GoodsWriter gw = new GoodsWriter();
 				gw.saveGoodsInFile(Main.mainWindow.goods);
+				
 				dispose();
+				Main.mainWindow.radio1.setSelected(true);
+				Main.mainWindow.goodsTable.setModel(Main.mainWindow.goodsModel);
 				Main.mainWindow.goodsTable.updateUI();
 				
 			}

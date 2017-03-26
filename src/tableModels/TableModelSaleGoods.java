@@ -5,76 +5,83 @@ import java.util.HashSet;
 import java.util.Set;
 
 import javax.swing.event.TableModelListener;
+import javax.swing.table.AbstractTableModel;
 import javax.swing.table.TableModel;
 
+import main.Main;
+import objectsForStore.Goods;
 import objectsForStore.SaleGoods;
 
-public class TableModelSaleGoods implements TableModel{
+public class TableModelSaleGoods extends AbstractTableModel{
+	
+	private ArrayList<SaleGoods> saleGoods;
 	
 	private Set<TableModelListener> listeners = new HashSet<TableModelListener>();
-
-    private ArrayList<SaleGoods> saleGoods;
-
-    public TableModelSaleGoods(ArrayList<SaleGoods> saleGoods) {
-        this.saleGoods = saleGoods;
+	
+	public TableModelSaleGoods(ArrayList<SaleGoods> saleGoods) {
+    	this.saleGoods = saleGoods;
+    }
+	
+	public void addTableModelListener(TableModelListener listener) {
+    	listeners.add(listener);
+    }
+	
+	public void removeTableModelListener(TableModelListener listener) {
+        listeners.remove(listener);
     }
 
 	@Override
-	public void addTableModelListener(TableModelListener listener) {
-		listeners.add(listener);
-	}
-
-	@Override
-	public Class<?> getColumnClass(int columnIndex) {
-		return null;
-	}
-
-	@Override
 	public int getColumnCount() {
-		return 5;
-	}
-
-	@Override
-	public String getColumnName(int columnIndex) {
-		return null;
+		return 6;
 	}
 
 	@Override
 	public int getRowCount() {
 		return saleGoods.size();
 	}
+	
+	
+	public String getColumnName(int columnIndex) {
+	    switch (columnIndex) {
+	    	case 0:
+	    		return "Date";  
+	        case 1:
+	            return "Product Name";
+	        case 2:
+	            return "Manufacturer";
+	        case 3:
+	            return "Quantity";
+	        case 4:
+	            return "Unit";
+	        case 5:
+	            return "Price";
+	        }
+	    return "";
+	}
 
 	@Override
 	public Object getValueAt(int rowIndex, int columnIndex) {
-		SaleGoods saleIndex = saleGoods.get(rowIndex);
-		switch(columnIndex) {
-		case 0:
-            return saleIndex.getSaleGoodsID();
+		SaleGoods goodIndex = saleGoods.get(rowIndex);
+		Goods tempGood = null;
+		for (Goods g : Main.mainWindow.goods) {
+			if(g.getID()==goodIndex.getSaleGoodsID())
+				tempGood =g;
+		}
+        switch (columnIndex) {
+        case 0:
+            return goodIndex.getDate();
         case 1:
-            return saleIndex.getDate();
+            return tempGood.getName();
         case 2:
-            return saleIndex.getQuantity();
+            return tempGood.getMaker();
         case 3:
-            return saleIndex.getUnit();
+            return goodIndex.getQuantity();
         case 4:
-            return saleIndex.getPrice();
+            return tempGood.getUnit();
+        case 5:
+            return tempGood.getPrice();
         }
         return "";
-	}
-
-	@Override
-	public boolean isCellEditable(int rowIndex, int columnIndex) {
-		return false;
-	}
-
-	@Override
-	public void removeTableModelListener(TableModelListener listener) {
-		listeners.remove(listener);
-	}
-
-	@Override
-	public void setValueAt(Object aValue, int rowIndex, int columnIndex) {
-		
 	}
 
 }

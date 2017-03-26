@@ -102,7 +102,8 @@ public class WindowSearchResult extends JDialog {
 							rawIndex = Main.mainWindow.goods.indexOf(Main.mainWindow.goods.get(i));
 						}
 					}
-
+					Main.mainWindow.radio1.setSelected(true);
+					Main.mainWindow.goodsTable.setModel(Main.mainWindow.goodsModel);
 					Main.mainWindow.goodsTable.setRowSelectionInterval(rawIndex, rawIndex);
 					dispose();
 				}

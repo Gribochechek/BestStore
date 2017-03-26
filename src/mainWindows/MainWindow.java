@@ -42,6 +42,7 @@ import objectsForStore.Subgroup;
 import streams.GoodsReader;
 import streams.GoodsWriter;
 import streams.GroupsReader;
+import streams.SaleGoodsReader;
 import streams.SubgroupsReader;
 import tableModels.TableModelGoods;
 import tableModels.TableModelSaleGoods;
@@ -64,8 +65,8 @@ public class MainWindow extends JFrame implements ChangeListener {
 	public JButton bGroupRemove;
 	public JButton bGroupEdit;
 	public JButton bSubgroupAdd, bSubgroupRemove, bSubgroupEdit;
-	public JButton bSearch, bStatistic;
-	public JButton bSaleEdit, bSaleRemove, bSaleStatistic;
+	public JButton bSearch, bStatistic, bSale;
+	public JButton bSaleRemove, bSaleStatistic;
 	public JRadioButton radio1, radio2, radio3, radio4, radio5, radio6;
 
 	// --------------------------------------------------------------
@@ -148,11 +149,13 @@ public class MainWindow extends JFrame implements ChangeListener {
 		groups = grr.getGroupsList();
 		SubgroupsReader sgr = new SubgroupsReader();
 		subgroups = sgr.getSubGroupsList();
+		SaleGoodsReader slgr = new SaleGoodsReader();
+		saleGoods = slgr.getProductsList();
 		
 		
 		// export in Excel example
-		GoodsWriter gw = new GoodsWriter();
-		gw.exportGoodsInExcel(goods, "data");
+	//	GoodsWriter gw = new GoodsWriter();
+	//	gw.exportGoodsInExcel(goods, "data");
 
 		// Table Goods
 		goodsModel = new TableModelGoods(goods);
@@ -166,7 +169,8 @@ public class MainWindow extends JFrame implements ChangeListener {
 		// Table SaleGoods
 		saleGoodsModel = new TableModelSaleGoods(saleGoods);
 		saleGoodsTable = new JTable(saleGoodsModel);
-		setColumnWidth(saleGoodsTable, new int[] { 25, 5, 150, 10, 180 });
+		saleGoodsTable.getTableHeader().setReorderingAllowed(false);
+		setColumnWidth(saleGoodsTable, new int[] { 50, 100, 50, 30, 30, 30 });
 		jsp2 = new JScrollPane(saleGoodsTable);
 		jsp2.setBounds(20, 80, 850, 351);
 
@@ -196,6 +200,9 @@ public class MainWindow extends JFrame implements ChangeListener {
 
 		Icon searchIcon = new ImageIcon("images\\Search.png");
 		Icon statisticsIcon = new ImageIcon("images\\Statistic.png");
+		Icon saleIcon = new ImageIcon("images\\Sale.png");
+		
+		
 		
 		Icon really = new ImageIcon("images\\Really.png");
 
@@ -242,20 +249,21 @@ public class MainWindow extends JFrame implements ChangeListener {
 
 		bStatistic = new JButton(statisticsIcon);
 		bStatistic.setBounds(64 * 7 + BUTTON_SPACE * 15, 435, 64, 64);
-		bStatistic.setToolTipText("Statistics");
+		bStatistic.setToolTipText("Statistics of Stock");
+		
+		bSale = new JButton(saleIcon);
+		bSale.setBounds(64 * 7 + BUTTON_SPACE * 15+200, 435, 64, 64);
+		bSale.setToolTipText("Sale product");
 
 		// Buttons on saleGoods
-		bSaleEdit = new JButton(goodAddIcon);
-		bSaleEdit.setBounds(BUTTON_SPACE * 2, 435, 64, 64);
-		bSaleEdit.setToolTipText("Add");
 
 		bSaleRemove = new JButton(goodRemoveIcon);
-		bSaleRemove.setBounds(64 * 1 + BUTTON_SPACE * 3, 435, 64, 64);
-		bSaleRemove.setToolTipText("Delete");
+		bSaleRemove.setBounds(BUTTON_SPACE * 2, 435, 64, 64);
+		bSaleRemove.setToolTipText("Product Return");
 
 		bSaleStatistic = new JButton(statisticsIcon);
-		bSaleStatistic.setBounds(64 * 2 + BUTTON_SPACE * 6, 435, 64, 64);
-		bSaleStatistic.setToolTipText("Statistics");
+		bSaleStatistic.setBounds(64 * 1 + BUTTON_SPACE * 3, 435, 64, 64);
+		bSaleStatistic.setToolTipText("Statistics of SaleGoods");
 
 		// Add tabs
 		groupsLeft.addTab("Goods", pFirstTab);
@@ -279,6 +287,8 @@ public class MainWindow extends JFrame implements ChangeListener {
 		pFirstTab.add(bGoodsRemove);
 		pFirstTab.add(bSearch);
 		pFirstTab.add(bStatistic);
+		pFirstTab.add(bSale);
+		
 
 		// RADIO BUTTONS on first tab
 		JLabel label2 = new JLabel("Show Goods:");
@@ -325,20 +335,9 @@ public class MainWindow extends JFrame implements ChangeListener {
 		jl2.setBounds(375, 5, 150, 21);
 		jl2.setFont(new Font("Times New Roman", Font.BOLD, 16));
 		pSecondTab.add(jl2);
-		pSecondTab.add(jsp2);
-		pSecondTab.add(bSaleEdit);
+		pSecondTab.add(jsp2);  // тут почему-то нулл поинтер эксепшн
 		pSecondTab.add(bSaleRemove);
 		pSecondTab.add(bSaleStatistic);
-
-		// RADIO BUTTONS on second tab
-		JLabel jl2_1 = new JLabel("Show entries:");
-		jl2_1.setBounds(35, 45, 110, 21);
-		pSecondTab.add(jl2_1);
-
-		radio4 = new JRadioButton("All");
-		radio4.setBounds(170, 45, 50, 23);
-		radio4.addActionListener(rbaListener);
-		pSecondTab.add(radio4);
 
 		// ActionListeners
 		bGroupAdd.addActionListener(aListener);
@@ -352,9 +351,9 @@ public class MainWindow extends JFrame implements ChangeListener {
 		bGoodsRemove.addActionListener(aListener);
 		bSearch.addActionListener(aListener);
 		bStatistic.addActionListener(aListener);
-		bSaleEdit.addActionListener(aListener);
 		bSaleRemove.addActionListener(aListener);
 		bSaleStatistic.addActionListener(aListener);
+		bSale.addActionListener(aListener);
 		
 		groupsLeft.addChangeListener(this);
 		

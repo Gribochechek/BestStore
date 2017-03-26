@@ -6,15 +6,12 @@ public class SaleGoods {
 	
 	private int saleGoodsID;
 	private String date;
-	private String unit;
 	private double quantity;
-	private double price;
 	
-	public SaleGoods(int saleGoodsID, String date, double quantity, double price) {
+	public SaleGoods(int saleGoodsID, String date, double quantity) {
 		this.saleGoodsID = saleGoodsID;
 		this.date = date;
 		this.quantity = quantity;
-		this.price = price;
 		if (uniqueID < saleGoodsID)  {
 			uniqueID = saleGoodsID;
 		}
@@ -53,26 +50,10 @@ public class SaleGoods {
 		this.quantity = quantity;
 	}
 
-	public double getPrice() {
-		return price;
-	}
-
-	public void setPrice(double price) {
-		this.price = price;
-	}
-
-	public String getUnit() {
-		return unit;
-	}
-
-	public void setUnit(String unit) {
-		this.unit = unit;
-	}
 
 	@Override
 	public String toString() {
-		return "SaleGoods [saleGoodsID=" + saleGoodsID + ", date=" + date + ", quantity=" + quantity + ", price="
-				+ price + "]";
+		return "SaleGoods [saleGoodsID=" + saleGoodsID + ", date=" + date + ", quantity=" + quantity + "]";
 	}
 	
 	

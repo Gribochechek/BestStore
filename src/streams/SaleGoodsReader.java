@@ -25,11 +25,9 @@ public class SaleGoodsReader {
 					text = text.substring(text.indexOf("|") + 1);
 					
 					double pQuant = Double.parseDouble(text.substring(0, text.indexOf("|")));
-					text = text.substring(text.indexOf("|") + 1);
 					
-					double pPrice = Double.parseDouble(text.substring(0, text.indexOf("|")));
 					
-					tempGood = new SaleGoods(id, pDate, pQuant, pPrice);
+					tempGood = new SaleGoods(id, pDate, pQuant);
 					goods.add(tempGood);
 			
 				}

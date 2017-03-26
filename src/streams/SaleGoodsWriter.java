@@ -16,7 +16,7 @@ public class SaleGoodsWriter {
 			String s;
 			for (int i = 0; i < goods.size(); i++) {
 				SaleGoods tempGood = goods.get(i);
-				s = tempGood.getSaleGoodsID()+"|"+tempGood.getUnit()+"|"+tempGood.getQuantity()+"|"+tempGood.getPrice()+"|\n";	
+				s = tempGood.getSaleGoodsID()+"|"+tempGood.getDate()+"|"+tempGood.getQuantity()+"|\n";	
 				bufferWriter.write(s);
 			}
 			bufferWriter.close();
@@ -31,12 +31,12 @@ public class SaleGoodsWriter {
 		try {
 			FileWriter writer = new FileWriter(dir+"\\sale_goods.csv");
 			BufferedWriter bufferWriter = new BufferedWriter(writer);
-			String top = "id;quantity;unit;price;\n";
+			String top = "id;date;quantity;\n";
 			bufferWriter.write(top);
 			String s;
 			for (int i = 0; i < goods.size(); i++) {
 				SaleGoods tempGood = goods.get(i);
-				s = tempGood.getSaleGoodsID()+"|"+tempGood.getUnit()+"|"+tempGood.getQuantity()+"|"+tempGood.getPrice()+"|\n";	
+				s = tempGood.getSaleGoodsID()+"|"+tempGood.getDate()+"|"+tempGood.getQuantity()+"|\n";	
 				bufferWriter.write(s);
 			}
 			bufferWriter.close();
