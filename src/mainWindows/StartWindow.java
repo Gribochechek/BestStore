@@ -52,19 +52,18 @@ public class StartWindow extends JFrame {
 		setResizable(false);
 		getContentPane().setLayout(null);
 
-		title = new JLabel("Authorisation:");
+		title = new JLabel("Authorization:");
 		title.setHorizontalAlignment(SwingConstants.CENTER);
 		title.setFont(new Font("Times New Roman", Font.BOLD, 15));
 		title.setSize(100, 30);
 		title.setLocation(getWidth() / 2 - title.getWidth() / 2, 11);
 		add(title);
 
-		user = new JLabel("Користувач:");
-		user.setBounds(START_WIDTH_POINT * 2, START_HEIGHT_POINT, 85,
-				ELEMENT_HEIGHT);
+		user = new JLabel("User:");
+		user.setBounds(START_WIDTH_POINT * 3 + 2, START_HEIGHT_POINT, 85, ELEMENT_HEIGHT);
 		add(user);
 
-		password = new JLabel("Пароль:");
+		password = new JLabel("Password:");
 		password.setHorizontalAlignment(SwingConstants.CENTER);
 		password.setBounds(START_WIDTH_POINT * 2, START_HEIGHT_POINT
 				+ ELEMENT_HEIGHT + SPACE, 85, ELEMENT_HEIGHT);
@@ -81,14 +80,14 @@ public class StartWindow extends JFrame {
 		add(ok);
 		ok.addActionListener(handler);
 
-		cancel = new JButton("Вийти");
+		cancel = new JButton("Cancel");
 		cancel.setSize(100, 23);
 		cancel.setLocation(175, 200);
 		add(cancel);
 		cancel.addActionListener(handler);
 		
 		userChoser = new JComboBox<String>();
-		String string[] = {"User1"};
+		String string[] = {"User"};
 		userChoser.setModel(new DefaultComboBoxModel<String>(string));
 		userChoser.setBounds(95, START_HEIGHT_POINT, 150, TEXTFIELD_HEIGHT);
 		userChoser.addActionListener(handler);
@@ -118,7 +117,7 @@ public class StartWindow extends JFrame {
 			
 			if (e.getSource() == ok){
 				
-				if (userChoser.getSelectedItem().equals("User1")){
+				if (userChoser.getSelectedItem().equals("User")){
 					if (checkPassword()) {					
 						Main.isLogCorrect = true;
 						try {
@@ -127,7 +126,7 @@ public class StartWindow extends JFrame {
 							e1.printStackTrace();
 						}
 					} else {
-						JOptionPane.showMessageDialog(null, "Введено невірний пароль");
+						JOptionPane.showMessageDialog(null, "Incorrect password");
 						return;
 					}
 				}
