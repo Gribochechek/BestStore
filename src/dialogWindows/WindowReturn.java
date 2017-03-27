@@ -4,9 +4,6 @@ import java.awt.Font;
 import java.awt.Frame;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.text.SimpleDateFormat;
-import java.util.Date;
-
 import javax.swing.JButton;
 import javax.swing.JDialog;
 import javax.swing.JLabel;
@@ -68,20 +65,20 @@ public class WindowReturn extends JDialog {
 		title3.setBounds(50, 60, 200, 30);
 		getContentPane().add(title3);
 
-		title4 = new JLabel("Max: ");
+		title4 = new JLabel("Max: "+tempSalegood.getQuantity());
 		title4.setHorizontalAlignment(SwingConstants.CENTER);
 		title4.setFont(new Font("Times New Roman", Font.BOLD, 12));
 		title4.setBounds(50, 80, 200, 30);
 		getContentPane().add(title4);
 
 		slider = new JSlider(0, (int) tempSalegood.getQuantity(), 0);
-		slider.setBounds(50, 110, 150, 30);
+		slider.setBounds(10, 110, 220, 30);
 		slider.setSnapToTicks(true);
 		slider.setPaintLabels(true);
-		slider.setMajorTickSpacing((int) tempGood.getQuantity() / 5);
-		slider.setMinorTickSpacing((int) tempGood.getQuantity() / 10);
+		slider.setMajorTickSpacing((int) tempSalegood.getQuantity() / 5);
+		slider.setMinorTickSpacing((int) tempSalegood.getQuantity() / 10);
 		tf = new JLabel("0");
-		tf.setBounds(220, 110, 30, 30);
+		tf.setBounds(240, 110, 30, 30);
 		listener = new ChangeListener() {
 			@Override
 			public void stateChanged(ChangeEvent event) {

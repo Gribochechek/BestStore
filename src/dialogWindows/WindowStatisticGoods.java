@@ -4,8 +4,6 @@ import java.awt.Font;
 import java.awt.Frame;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.util.ArrayList;
-
 import javax.swing.DefaultComboBoxModel;
 import javax.swing.JButton;
 import javax.swing.JComboBox;
@@ -14,7 +12,6 @@ import javax.swing.JLabel;
 import javax.swing.SwingConstants;
 
 import main.Main;
-import objectsForStore.Goods;
 
 public class WindowStatisticGoods extends JDialog {
 

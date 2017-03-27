@@ -2,8 +2,6 @@ package dialogWindows;
 
 import java.awt.Frame;
 
-import javax.swing.JOptionPane;
-
 import main.Main;
 import objectsForStore.Goods;
 import streams.GoodsWriter;

@@ -6,7 +6,6 @@ import java.awt.event.ActionListener;
 
 import javax.swing.DefaultComboBoxModel;
 
-import dialogWindows.WindowSubgroupAdd.listener;
 import main.Main;
 import streams.GoodsWriter;
 import streams.SubgroupsWriter;

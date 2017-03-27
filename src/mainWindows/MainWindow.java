@@ -34,13 +34,11 @@ import javax.swing.table.TableModel;
 
 import listeners.ListenerButton;
 import listeners.RadioButtonListener;
-import main.Main;
 import objectsForStore.Goods;
 import objectsForStore.Group;
 import objectsForStore.SaleGoods;
 import objectsForStore.Subgroup;
 import streams.GoodsReader;
-import streams.GoodsWriter;
 import streams.GroupsReader;
 import streams.SaleGoodsReader;
 import streams.SubgroupsReader;
@@ -65,7 +63,7 @@ public class MainWindow extends JFrame implements ChangeListener {
 	public JButton bGroupRemove;
 	public JButton bGroupEdit;
 	public JButton bSubgroupAdd, bSubgroupRemove, bSubgroupEdit;
-	public JButton bSearch, bStatistic, bSale;
+	public JButton bSearch, bStatistic, bExport, bSale, bIncome;
 	public JButton bSaleRemove, bSaleStatistic;
 	public JRadioButton radio1, radio2, radio3, radio4, radio5, radio6;
 
@@ -152,10 +150,6 @@ public class MainWindow extends JFrame implements ChangeListener {
 		SaleGoodsReader slgr = new SaleGoodsReader();
 		saleGoods = slgr.getProductsList();
 		
-		
-		// export in Excel example
-	//	GoodsWriter gw = new GoodsWriter();
-	//	gw.exportGoodsInExcel(goods, "data");
 
 		// Table Goods
 		goodsModel = new TableModelGoods(goods);
@@ -201,6 +195,9 @@ public class MainWindow extends JFrame implements ChangeListener {
 		Icon searchIcon = new ImageIcon("images\\Search.png");
 		Icon statisticsIcon = new ImageIcon("images\\Statistic.png");
 		Icon saleIcon = new ImageIcon("images\\Sale.png");
+		
+		Icon exportIcon = new ImageIcon("images\\Export.png");
+		Icon incomeIcon = new ImageIcon("images\\Income.png");
 		
 		
 		
@@ -251,9 +248,17 @@ public class MainWindow extends JFrame implements ChangeListener {
 		bStatistic.setBounds(64 * 7 + BUTTON_SPACE * 15, 435, 64, 64);
 		bStatistic.setToolTipText("Statistics of Stock");
 		
+		bExport = new JButton(exportIcon);
+		bExport.setBounds(80 + 64 * 6 + BUTTON_SPACE * 10, 505, 64, 64);
+		bExport.setToolTipText("Export goods in Excel");
+		
 		bSale = new JButton(saleIcon);
 		bSale.setBounds(64 * 7 + BUTTON_SPACE * 15+200, 435, 64, 64);
 		bSale.setToolTipText("Sale product");
+		
+		bIncome = new JButton(incomeIcon);
+		bIncome.setBounds(64 * 7 + BUTTON_SPACE * 15+130, 435, 64, 64);
+		bIncome.setToolTipText("Arrived at stock");
 
 		// Buttons on saleGoods
 
@@ -288,7 +293,8 @@ public class MainWindow extends JFrame implements ChangeListener {
 		pFirstTab.add(bSearch);
 		pFirstTab.add(bStatistic);
 		pFirstTab.add(bSale);
-		
+		pFirstTab.add(bExport);
+		pFirstTab.add(bIncome);
 
 		// RADIO BUTTONS on first tab
 		JLabel label2 = new JLabel("Show Goods:");
@@ -354,6 +360,8 @@ public class MainWindow extends JFrame implements ChangeListener {
 		bSaleRemove.addActionListener(aListener);
 		bSaleStatistic.addActionListener(aListener);
 		bSale.addActionListener(aListener);
+		bExport.addActionListener(aListener);
+		bIncome.addActionListener(aListener);
 		
 		groupsLeft.addChangeListener(this);
 		
@@ -365,7 +373,7 @@ public class MainWindow extends JFrame implements ChangeListener {
             
 			public void windowClosing(WindowEvent event) {
 				Object[] options = { "Yes", "No!" };
-                int n = JOptionPane.showOptionDialog(event.getWindow(), "Close window?",
+                int n = JOptionPane.showOptionDialog(event.getWindow(), "Close programm?",
                                 "Confirmation", JOptionPane.YES_NO_OPTION,
                                 JOptionPane.QUESTION_MESSAGE, really, options,
                                 options[0]);

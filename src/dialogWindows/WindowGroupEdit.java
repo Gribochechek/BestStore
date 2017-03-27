@@ -8,12 +8,9 @@ import javax.swing.DefaultComboBoxModel;
 import javax.swing.JComboBox;
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
-import javax.swing.JPanel;
-
 import main.Main;
 import objectsForStore.Group;
 import objectsForStore.Subgroup;
-import streams.GroupsWriter;
 
 public class WindowGroupEdit extends WindowGroupAdd {
 

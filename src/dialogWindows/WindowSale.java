@@ -11,7 +11,6 @@ import javax.swing.JButton;
 import javax.swing.JDialog;
 import javax.swing.JLabel;
 import javax.swing.JSlider;
-import javax.swing.JTextField;
 import javax.swing.SwingConstants;
 import javax.swing.event.ChangeEvent;
 import javax.swing.event.ChangeListener;
@@ -75,13 +74,13 @@ public class WindowSale extends JDialog {
 		getContentPane().add(title4);
 
 		slider = new JSlider(0, (int) tempGood.getQuantity(), 0);
-		slider.setBounds(50, 110, 150, 30);
+		slider.setBounds(10, 110, 220, 30);
 		slider.setSnapToTicks(true);
 		slider.setPaintLabels(true);
 		slider.setMajorTickSpacing((int) tempGood.getQuantity() / 5);
 		slider.setMinorTickSpacing((int) tempGood.getQuantity() / 10);
 		tf = new JLabel("0");
-		tf.setBounds(220, 110, 30, 30);
+		tf.setBounds(240, 110, 30, 30);
 		listener = new ChangeListener() {
 			@Override
 			public void stateChanged(ChangeEvent event) {

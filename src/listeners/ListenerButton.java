@@ -2,11 +2,10 @@ package listeners;
 
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.io.IOException;
-
 import javax.swing.JOptionPane;
 import javax.swing.WindowConstants;
 
+import dialogWindows.WindowArrive;
 import dialogWindows.WindowGoodsAdd;
 import dialogWindows.WindowGoodsDelete;
 import dialogWindows.WindowGoodsEdit;
@@ -23,7 +22,7 @@ import dialogWindows.WindowSubgroupDelete;
 import dialogWindows.WindowSubgroupEdit;
 import main.Main;
 import objectsForStore.Goods;
-import objectsForStore.SaleGoods;
+import streams.GoodsWriter;
 
 public class ListenerButton implements ActionListener {
 
@@ -149,6 +148,30 @@ public class ListenerButton implements ActionListener {
 			WindowStatisticGoods dialog = new WindowStatisticGoods(Main.mainWindow);
 			dialog.setVisible(true);
 			dialog.setDefaultCloseOperation(WindowConstants.DISPOSE_ON_CLOSE);
+
+		}
+		
+		if (e.getSource() == Main.mainWindow.bExport) {
+				GoodsWriter gw = new GoodsWriter();
+				gw.exportGoodsInExcel(Main.mainWindow.goods, "exports");
+				JOptionPane.showMessageDialog(Main.mainWindow, "Exported file: .../BestStore/exports/goods.csv");
+
+		}
+		
+		if (e.getSource() == Main.mainWindow.bIncome) {
+			if (Main.mainWindow.goodsTable.getSelectedRow() >= 0) {
+				int idOfIncomeProduct = (int) Main.mainWindow.goodsTable
+						.getValueAt(Main.mainWindow.goodsTable.getSelectedRow(), 0);
+				String nameOfIncomeProduct = (String) Main.mainWindow.goodsTable
+						.getValueAt(Main.mainWindow.goodsTable.getSelectedRow(), 1);
+				WindowArrive dialog = new WindowArrive(Main.mainWindow, idOfIncomeProduct,
+						nameOfIncomeProduct); 
+				dialog.setVisible(true);
+				dialog.setDefaultCloseOperation(WindowConstants.DISPOSE_ON_CLOSE);
+			}
+			else{
+				JOptionPane.showMessageDialog(Main.mainWindow, "No items selected");
+			}
 
 		}
 		

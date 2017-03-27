@@ -9,14 +9,10 @@ import javax.swing.DefaultComboBoxModel;
 import javax.swing.JButton;
 import javax.swing.JComboBox;
 import javax.swing.JDialog;
-import javax.swing.JFrame;
 import javax.swing.JLabel;
-import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.SwingConstants;
 
-import dialogWindows.WindowGroupAdd.eHandler;
-import dialogWindows.WindowGroupEdit.listener;
 import main.Main;
 import streams.GoodsWriter;
 import streams.GroupsWriter;

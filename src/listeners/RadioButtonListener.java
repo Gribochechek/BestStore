@@ -2,18 +2,10 @@ package listeners;
 
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.text.ParseException;
-import java.text.SimpleDateFormat;
 import java.util.ArrayList;
-import java.util.Date;
-
-import javax.swing.table.TableModel;
-
 import main.Main;
 import objectsForStore.Goods;
-import objectsForStore.SaleGoods;
 import tableModels.TableModelGoods;
-import tableModels.TableModelSaleGoods;
 
 public class RadioButtonListener implements ActionListener {
 

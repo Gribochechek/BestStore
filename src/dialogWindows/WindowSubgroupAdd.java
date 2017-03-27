@@ -9,7 +9,6 @@ import javax.swing.JComboBox;
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 
-import dialogWindows.WindowGroupEdit.listener;
 import main.Main;
 import objectsForStore.Group;
 import objectsForStore.Subgroup;

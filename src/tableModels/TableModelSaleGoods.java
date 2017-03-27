@@ -6,8 +6,6 @@ import java.util.Set;
 
 import javax.swing.event.TableModelListener;
 import javax.swing.table.AbstractTableModel;
-import javax.swing.table.TableModel;
-
 import main.Main;
 import objectsForStore.Goods;
 import objectsForStore.SaleGoods;

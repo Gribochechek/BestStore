@@ -5,9 +5,6 @@ import java.awt.Font;
 import java.awt.Frame;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.awt.event.KeyAdapter;
-import java.awt.event.KeyEvent;
-
 import javax.swing.BorderFactory;
 import javax.swing.DefaultComboBoxModel;
 import javax.swing.JButton;
@@ -20,11 +17,8 @@ import javax.swing.JTextField;
 import javax.swing.SwingConstants;
 
 import main.Main;
-import mainWindows.MainWindow;
 import objectsForStore.Goods;
-import objectsForStore.SaleGoods;
 import streams.GoodsWriter;
-import streams.SaleGoodsWriter;
 
 public class WindowGoodsAdd extends JDialog{
 	

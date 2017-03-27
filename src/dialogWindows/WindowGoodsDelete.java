@@ -11,7 +11,6 @@ import javax.swing.JLabel;
 import javax.swing.SwingConstants;
 
 import main.Main;
-import objectsForStore.Goods;
 import streams.GoodsWriter;
 
 

@@ -7,7 +7,6 @@ import java.awt.event.ActionListener;
 import javax.swing.DefaultComboBoxModel;
 import javax.swing.JOptionPane;
 
-import dialogWindows.WindowGroupEdit.listener;
 import main.Main;
 import objectsForStore.Group;
 import objectsForStore.Subgroup;

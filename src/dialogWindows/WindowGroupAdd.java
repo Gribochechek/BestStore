@@ -1,25 +1,17 @@
 package dialogWindows;
 
-import java.awt.BorderLayout;
 import java.awt.Color;
-import java.awt.FlowLayout;
-
 import javax.swing.BorderFactory;
-import javax.swing.DefaultComboBoxModel;
 import javax.swing.JButton;
 import javax.swing.JDialog;
 import javax.swing.JPanel;
-import javax.swing.border.EmptyBorder;
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 
-import objectsForStore.Goods;
 import objectsForStore.Group;
 import objectsForStore.Subgroup;
-import streams.GoodsWriter;
 import streams.GroupsWriter;
 
-import javax.swing.JTextArea;
 import javax.swing.JTextField;
 import javax.swing.SwingConstants;
 
@@ -27,11 +19,6 @@ import java.awt.Font;
 import java.awt.Frame;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.io.IOException;
-
-import javax.swing.border.LineBorder;
-
-import dialogWindows.WindowGoodsAdd.eHandler;
 import main.Main;
 
 public class WindowGroupAdd extends JDialog {
