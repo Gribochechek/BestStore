@@ -133,7 +133,7 @@ public class StartWindow extends JFrame {
 				}
 				
 				Main.mainWindow.setVisible(true);
-				
+				Main.mainWindow.setDefaultCloseOperation(DO_NOTHING_ON_CLOSE);
 				dispose();
 			}
 			

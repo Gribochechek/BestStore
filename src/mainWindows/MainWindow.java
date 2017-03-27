@@ -34,6 +34,7 @@ import javax.swing.table.TableModel;
 
 import listeners.ListenerButton;
 import listeners.RadioButtonListener;
+import main.Main;
 import objectsForStore.Goods;
 import objectsForStore.Group;
 import objectsForStore.SaleGoods;
@@ -363,11 +364,15 @@ public class MainWindow extends JFrame implements ChangeListener {
 			public void windowClosed(WindowEvent event) {}
             
 			public void windowClosing(WindowEvent event) {
-                Object[] options = { "Yes", "No" };
-                JOptionPane.showOptionDialog(event.getWindow(), "Exit program?",
+				Object[] options = { "Yes", "No!" };
+                int n = JOptionPane.showOptionDialog(event.getWindow(), "Close window?",
                                 "Confirmation", JOptionPane.YES_NO_OPTION,
                                 JOptionPane.QUESTION_MESSAGE, really, options,
-                                options[0]);           
+                                options[0]);
+                if (n == 0) {
+                    event.getWindow().setVisible(false);
+                    System.exit(0);
+                }
             }
  
             public void windowDeactivated(WindowEvent event) {}
