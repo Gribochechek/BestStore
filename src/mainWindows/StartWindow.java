@@ -7,6 +7,7 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.io.IOException;
 
+import javax.swing.DefaultComboBoxModel;
 import javax.swing.JButton;
 import javax.swing.JComboBox;
 import javax.swing.JFrame;
@@ -16,7 +17,7 @@ import javax.swing.JPasswordField;
 import javax.swing.JTextField;
 import javax.swing.SwingConstants;
 
-
+import main.Main;
 
 public class StartWindow extends JFrame {
 	private static final long serialVersionUID = 1L;
@@ -33,23 +34,25 @@ public class StartWindow extends JFrame {
 	JPasswordField passField;
 	JButton ok, cancel;
 
-	MainWindow mW = new MainWindow();
-
 	final int START_HEIGHT_POINT = 100;
 	final int START_WIDTH_POINT = 10;
 	final int ELEMENT_HEIGHT = 20;
 	final int TEXTFIELD_HEIGHT = 25;
 	final int SPACE = 15;
+	
+	eHandler handler = new eHandler();
+	
+	//MainWindow mainWindow = new MainWindow();
 
 	public StartWindow(String s) {
 		super(s);
-
+		
 		setSize(stWinSize, stWinSize);//
 		setLocation(width / 2 - stWinSize / 2, height / 2 - stWinSize / 2);
 		setResizable(false);
 		getContentPane().setLayout(null);
 
-		title = new JLabel("Авторизація");
+		title = new JLabel("Authorisation:");
 		title.setHorizontalAlignment(SwingConstants.CENTER);
 		title.setFont(new Font("Times New Roman", Font.BOLD, 15));
 		title.setSize(100, 30);
@@ -60,10 +63,6 @@ public class StartWindow extends JFrame {
 		user.setBounds(START_WIDTH_POINT * 2, START_HEIGHT_POINT, 85,
 				ELEMENT_HEIGHT);
 		add(user);
-
-		userName = new JTextField();
-		userName.setBounds(95, START_HEIGHT_POINT, 150, TEXTFIELD_HEIGHT);
-		add(userName);
 
 		password = new JLabel("Пароль:");
 		password.setHorizontalAlignment(SwingConstants.CENTER);
@@ -80,17 +79,24 @@ public class StartWindow extends JFrame {
 		ok.setSize(100, 23);
 		ok.setLocation(25, 200);
 		add(ok);
-		// ok.addActionListener(handler);
+		ok.addActionListener(handler);
 
 		cancel = new JButton("Вийти");
 		cancel.setSize(100, 23);
 		cancel.setLocation(175, 200);
 		add(cancel);
-		// cancel.addActionListener(handler);
+		cancel.addActionListener(handler);
+		
+		userChoser = new JComboBox<String>();
+		String string[] = {"User1"};
+		userChoser.setModel(new DefaultComboBoxModel<String>(string));
+		userChoser.setBounds(95, START_HEIGHT_POINT, 150, TEXTFIELD_HEIGHT);
+		userChoser.addActionListener(handler);
+		getContentPane().add(userChoser);
 
 	}
 
-	boolean checkPassword() {
+	public boolean checkPassword() {
 		char[] correctPass = { '1' };
 		char[] pass = passField.getPassword();
 
@@ -109,20 +115,29 @@ public class StartWindow extends JFrame {
 	public class eHandler implements ActionListener {
 
 		public void actionPerformed(ActionEvent e) {
-
-			if (e.getSource() == ok) {
-
-				if (checkPassword())
-
-					mW.setVisible(true);
-
+			
+			if (e.getSource() == ok){
+				
+				if (userChoser.getSelectedItem().equals("User1")){
+					if (checkPassword()) {					
+						Main.isLogCorrect = true;
+						try {
+							Main.mainWindow = new MainWindow();
+						} catch (IOException e1) {
+							e1.printStackTrace();
+						}
+					} else {
+						JOptionPane.showMessageDialog(null, "Введено невірний пароль");
+						return;
+					}
+				}
+				
+				Main.mainWindow.setVisible(true);
+				
 				dispose();
-			} else {
-				JOptionPane.showMessageDialog(null, "Введено невірний пароль");
-				return;
 			}
-			if (e.getSource() == cancel) {
-
+			
+			if (e.getSource() == cancel){
 				System.exit(0);
 			}
 		}

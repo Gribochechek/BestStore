@@ -13,7 +13,6 @@ import javax.swing.border.EmptyBorder;
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 
-import main.Main;
 import objectsForStore.Goods;
 import objectsForStore.Group;
 import objectsForStore.Subgroup;
@@ -33,6 +32,7 @@ import java.io.IOException;
 import javax.swing.border.LineBorder;
 
 import dialogWindows.WindowGoodsAdd.eHandler;
+import main.Main;
 
 public class WindowGroupAdd extends JDialog {
 
