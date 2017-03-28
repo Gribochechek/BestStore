@@ -153,7 +153,7 @@ public class ListenerButton implements ActionListener {
 		
 		if (e.getSource() == Main.mainWindow.bExport) {
 				GoodsWriter gw = new GoodsWriter();
-				gw.exportGoodsInExcel(Main.mainWindow.goods, "exports");
+				gw.exportGoodsInExcel(Main.mainWindow.goods, "data");
 				JOptionPane.showMessageDialog(Main.mainWindow, "Exported file: .../BestStore/exports/goods.csv");
 
 		}

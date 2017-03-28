@@ -51,8 +51,7 @@ public class MainWindow extends JFrame implements ChangeListener {
 	private JPanel title = new JPanel();
 	private JPanel listOfGroups = new JPanel();
 	private JPanel listOfGoods = new JPanel();
-	private JTabbedPane groupsLeft = new JTabbedPane();
-	private JTabbedPane goodsRight = new JTabbedPane();
+	private JTabbedPane goodsAll = new JTabbedPane();
 	private JPanel pFirstTab = new JPanel();
 	private JPanel pSecondTab = new JPanel();
 
@@ -125,10 +124,7 @@ public class MainWindow extends JFrame implements ChangeListener {
 		title.add(label);
 
 		listOfGroups.setLayout(new BorderLayout());
-		listOfGroups.add(groupsLeft);
-
-		listOfGoods.setLayout(new BorderLayout());
-		listOfGoods.add(goodsRight);
+		listOfGroups.add(goodsAll);
 
 		mainPanel.add(listOfGoods, BorderLayout.WEST);
 		getContentPane().add(mainPanel);
@@ -271,8 +267,8 @@ public class MainWindow extends JFrame implements ChangeListener {
 		bSaleStatistic.setToolTipText("Statistics of SaleGoods");
 
 		// Add tabs
-		groupsLeft.addTab("Goods", pFirstTab);
-		groupsLeft.addTab("Sale Goods", pSecondTab);
+		goodsAll.addTab("Goods", pFirstTab);
+		goodsAll.addTab("Sale Goods", pSecondTab);
 
 		// Add on first Tab
 		pFirstTab.setLayout(null);
@@ -363,7 +359,7 @@ public class MainWindow extends JFrame implements ChangeListener {
 		bExport.addActionListener(aListener);
 		bIncome.addActionListener(aListener);
 		
-		groupsLeft.addChangeListener(this);
+		goodsAll.addChangeListener(this);
 		
 		//Adding Window Listener
 		addWindowListener(new WindowListener() {
