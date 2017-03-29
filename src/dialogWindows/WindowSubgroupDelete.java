@@ -43,7 +43,19 @@ int tempSubgroupID = Main.mainWindow.subgroups.get(indexOfTempGroopInArrayList).
 		SubgroupsWriter sgw = new SubgroupsWriter();
 		sgw.saveSubgroupsInFile(Main.mainWindow.subgroups);
 		
-		
+		if(Main.mainWindow.subgroups.size()==0){
+		Main.mainWindow.bSubgroupEdit.setEnabled(false);
+		Main.mainWindow.bSubgroupRemove.setEnabled(false);
+		Main.mainWindow.bGoodsAdd.setEnabled(false);
+		Main.mainWindow.bGoodsEdit.setEnabled(false);
+		Main.mainWindow.bGoodsRemove.setEnabled(false);
+		Main.mainWindow.bSearch.setEnabled(false);
+		Main.mainWindow.bStatistic.setEnabled(false);
+		Main.mainWindow.bSale.setEnabled(false);
+		Main.mainWindow.bExport.setEnabled(false);
+		Main.mainWindow.bIncome.setEnabled(false);
+		}
+		WindowGoodsDelete.disableGoodsButtons();
 	}
 
 	class listener2 implements ActionListener {

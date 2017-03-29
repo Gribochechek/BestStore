@@ -59,7 +59,7 @@ public class WindowGoodsAdd extends JDialog{
 				85, 14);
 		getContentPane().add(subgroup);
 		comboSubgroup = new JComboBox();
-		string = Main.mainWindow.getSubgroupNamesByGroupID(comboGroup.getSelectedIndex()+1);
+		string = Main.mainWindow.getSubgroupNamesByGroupID(Main.mainWindow.groups.get(comboGroup.getSelectedIndex()).getGroupID());
 		comboSubgroup.setModel(new DefaultComboBoxModel(string));
 		comboSubgroup.setBounds(124, 63+14+15-3, 146, 25);
 		getContentPane().add(comboSubgroup);
@@ -142,6 +142,10 @@ public class WindowGoodsAdd extends JDialog{
 		public void actionPerformed(ActionEvent e) {
 			
 			if (e.getSource() == ok){
+				if (comboSubgroup.getSelectedItem()==null) {
+					JOptionPane.showMessageDialog(null, "Subgroup is empty");
+					return;
+				}
 				if (jt_name.getText().equals("")) {
 					JOptionPane.showMessageDialog(null, "Invalid Name format");
 					return;
@@ -154,7 +158,7 @@ public class WindowGoodsAdd extends JDialog{
 					JOptionPane.showMessageDialog(null, "Invalid Measurement format");
 					return;
 				}
-				if (!isDouble(jt_price.getText())) {
+				if (jt_price.getText().equals("")||!isDouble(jt_price.getText())) {
 					JOptionPane.showMessageDialog(null, "Invalid Price format");
 					return;
 				}
@@ -220,6 +224,13 @@ public class WindowGoodsAdd extends JDialog{
 		GoodsWriter gw = new GoodsWriter();
 		gw.saveGoodsInFile(Main.mainWindow.goods);
 		
+		Main.mainWindow.bGoodsEdit.setEnabled(true);
+		Main.mainWindow.bGoodsRemove.setEnabled(true);
+		Main.mainWindow.bSearch.setEnabled(true);
+		Main.mainWindow.bStatistic.setEnabled(true);
+		Main.mainWindow.bSale.setEnabled(true);
+		Main.mainWindow.bExport.setEnabled(true);
+		Main.mainWindow.bIncome.setEnabled(true);
 		
 		Main.mainWindow.goodsTable.updateUI();
 		

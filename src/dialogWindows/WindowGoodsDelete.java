@@ -68,7 +68,12 @@ public class WindowGoodsDelete extends JDialog{
 				Main.mainWindow.goodsTable.setModel(Main.mainWindow.goodsModel);
 				Main.mainWindow.goodsTable.updateUI();
 				
+				disableGoodsButtons();
+				
+				
 			}
+
+			
 			
 			
 		});
@@ -85,6 +90,19 @@ public class WindowGoodsDelete extends JDialog{
 			}
 			
 		});
+		
+	}
+	
+	 static void disableGoodsButtons() {
+		if(Main.mainWindow.goods.size()==0){
+			Main.mainWindow.bGoodsEdit.setEnabled(false);
+			Main.mainWindow.bGoodsRemove.setEnabled(false);
+			Main.mainWindow.bSearch.setEnabled(false);
+			Main.mainWindow.bStatistic.setEnabled(false);
+			Main.mainWindow.bSale.setEnabled(false);
+			Main.mainWindow.bExport.setEnabled(false);
+			Main.mainWindow.bIncome.setEnabled(false);
+			}
 		
 	}
 

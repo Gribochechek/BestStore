@@ -114,6 +114,22 @@ public class WindowGroupDelete extends JDialog {
 		GroupsWriter gw = new GroupsWriter();
 		gw.saveGroupsInFile(Main.mainWindow.groups);
 		
+		if(Main.mainWindow.groups.size()==0){
+			Main.mainWindow.bGroupEdit.setEnabled(false);
+			Main.mainWindow.bGroupRemove.setEnabled(false);
+			Main.mainWindow.bSubgroupAdd.setEnabled(false);
+			Main.mainWindow.bSubgroupEdit.setEnabled(false);
+			Main.mainWindow.bSubgroupRemove.setEnabled(false);
+			Main.mainWindow.bGoodsAdd.setEnabled(false);
+			Main.mainWindow.bGoodsEdit.setEnabled(false);
+			Main.mainWindow.bGoodsRemove.setEnabled(false);
+			Main.mainWindow.bSearch.setEnabled(false);
+			Main.mainWindow.bStatistic.setEnabled(false);
+			Main.mainWindow.bSale.setEnabled(false);
+			Main.mainWindow.bExport.setEnabled(false);
+			Main.mainWindow.bIncome.setEnabled(false);
+		}
+		WindowGoodsDelete.disableGoodsButtons();
 		
 		
 	}

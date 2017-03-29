@@ -18,7 +18,7 @@ public class WindowSubgroupAdd extends WindowGroupAdd{
 	
 	JLabel subgroupDescription = new JLabel();
 	JComboBox allGroups = new JComboBox();
-	int groupID = Main.mainWindow.groups.get(0).getGroupID();;
+	int groupID;
 	Subgroup subgroup;
 	SubgroupsWriter sgw = new SubgroupsWriter();
 
@@ -73,7 +73,7 @@ public class WindowSubgroupAdd extends WindowGroupAdd{
 		}
 		
 	
-		
+		groupID =  Main.mainWindow.groups.get(allGroups.getSelectedIndex()).getGroupID();
 		if(Main.mainWindow.subgroups.size()>0){
 			subgroup = new Subgroup(groupID, Main.mainWindow.subgroups.get(Main.mainWindow.subgroups.size()-1).getSubgroupID()+1, jt_name.getText());
 		}
@@ -83,7 +83,9 @@ public class WindowSubgroupAdd extends WindowGroupAdd{
 		Main.mainWindow.subgroups.add(subgroup);
 		
 		sgw.saveSubgroupsInFile(Main.mainWindow.subgroups);
-		
+		Main.mainWindow.bSubgroupEdit.setEnabled(true);
+		Main.mainWindow.bSubgroupRemove.setEnabled(true);
+		Main.mainWindow.bGoodsAdd.setEnabled(true);
 		
 	}
 

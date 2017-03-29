@@ -104,7 +104,7 @@ public class WindowGroupAdd extends JDialog {
 				
 			
 				//если групп еще нет - приссваиваем первой ID = 1, если есть - ID последнего в списке +1
-				if(Main.mainWindow.goods.size()>0){
+				if(Main.mainWindow.groups.size()>0){
 				group = new Group(Main.mainWindow.groups.get(Main.mainWindow.groups.size()-1).getGroupID()+1, jt_name.getText(), jt_description.getText());
 				}
 				else{
@@ -114,6 +114,10 @@ public class WindowGroupAdd extends JDialog {
 				
 				
 				gw.saveGroupsInFile(Main.mainWindow.groups);
+				
+				Main.mainWindow.bGroupEdit.setEnabled(true);
+				Main.mainWindow.bGroupRemove.setEnabled(true);
+				Main.mainWindow.bSubgroupAdd.setEnabled(true);
 		
 		
 	

@@ -8,6 +8,7 @@ import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.awt.event.WindowEvent;
 import java.awt.event.WindowListener;
+import java.io.File;
 import java.io.IOException;
 import java.util.ArrayList;
 
@@ -107,6 +108,11 @@ public class MainWindow extends JFrame implements ChangeListener {
 	public JTextField jtf_date_2;
 
 	// --------------------------------------------------------------
+	
+	public File goodstxt = new File("data//goods.txt");
+	public File groupstxt = new File("data//groups.txt");
+	public File subgroupstxt = new File("data//subgroups.txt");
+	public File sale_goodstxt = new File("data//sale_goods.txt");
 
 	public MainWindow() throws IOException {
 		super();
@@ -114,6 +120,97 @@ public class MainWindow extends JFrame implements ChangeListener {
 		setSize(1000, 670);
 		setResizable(false);
 		setLocationRelativeTo(null);
+		
+		// Icons on the buttons
+				Icon groupAddIcon = new ImageIcon("images\\Add_Group.png");
+				Icon groupEditIcon = new ImageIcon("images\\Edit_Group.png");
+				Icon groupRemoveIcon = new ImageIcon("images\\Delete_Group.png");
+
+				Icon subgroupAddIcon = new ImageIcon("images\\Add_Subgroup.png");
+				Icon subgroupEditIcon = new ImageIcon("images\\Edit_Subgroup.png");
+				Icon subgroupRemoveIcon = new ImageIcon("images\\Delete_Subgroup.png");
+
+				Icon goodAddIcon = new ImageIcon("images\\Add_Good.png");
+				Icon goodEditIcon = new ImageIcon("images\\Edit_Good.png");
+				Icon goodRemoveIcon = new ImageIcon("images\\Delete_Good.png");
+
+				Icon searchIcon = new ImageIcon("images\\Search.png");
+				Icon statisticsIcon = new ImageIcon("images\\Statistic.png");
+				Icon saleIcon = new ImageIcon("images\\Sale.png");
+				
+				Icon exportIcon = new ImageIcon("images\\Export.png");
+				Icon incomeIcon = new ImageIcon("images\\Income.png");
+				
+				
+				
+				Icon really = new ImageIcon("images\\Really.png");
+		
+		// Buttons on Goods
+				bGroupAdd = new JButton(groupAddIcon);
+				bGroupAdd.setBounds(BUTTON_SPACE * 2, 435, 64, 64);
+				bGroupAdd.setToolTipText("Add group");
+
+				bGroupEdit = new JButton(groupEditIcon);
+				bGroupEdit.setBounds(32 + 5 + BUTTON_SPACE * 2, 505, 64, 64);
+				bGroupEdit.setToolTipText("Edit group");
+
+				bGroupRemove = new JButton(groupRemoveIcon);
+				bGroupRemove.setBounds(BUTTON_SPACE * 3 + 64, 435, 64, 64);
+				bGroupRemove.setToolTipText("Delete group");
+
+				bSubgroupAdd = new JButton(subgroupAddIcon);
+				bSubgroupAdd.setBounds(64 * 2 + BUTTON_SPACE * 6, 435, 64, 64);
+				bSubgroupAdd.setToolTipText("Add Subgroup");
+
+				bSubgroupEdit = new JButton(subgroupEditIcon);
+				bSubgroupEdit.setBounds(37 + 64 * 2 + BUTTON_SPACE * 6, 505, 64, 64);
+				bSubgroupEdit.setToolTipText("Edit Subgroup");
+
+				bSubgroupRemove = new JButton(subgroupRemoveIcon);
+				bSubgroupRemove.setBounds(64 * 3 + BUTTON_SPACE * 7, 435, 64, 64);
+				bSubgroupRemove.setToolTipText("Delete Subgroup");
+
+				bGoodsAdd = new JButton(goodAddIcon);
+				bGoodsAdd.setBounds(64 * 4 + BUTTON_SPACE * 10, 435, 64, 64);
+				bGoodsAdd.setToolTipText("Add product");
+
+				bGoodsEdit = new JButton(goodEditIcon);
+				bGoodsEdit.setBounds(37 + 64 * 4 + BUTTON_SPACE * 10, 505, 64, 64);
+				bGoodsEdit.setToolTipText("Edit product");
+
+				bGoodsRemove = new JButton(goodRemoveIcon);
+				bGoodsRemove.setBounds(64 * 5 + BUTTON_SPACE * 11, 435, 64, 64);
+				bGoodsRemove.setToolTipText("Delete product");
+
+				bSearch = new JButton(searchIcon);
+				bSearch.setBounds(64 * 6 + BUTTON_SPACE * 14, 435, 64, 64);
+				bSearch.setToolTipText("Find product");
+
+				bStatistic = new JButton(statisticsIcon);
+				bStatistic.setBounds(64 * 7 + BUTTON_SPACE * 15, 435, 64, 64);
+				bStatistic.setToolTipText("Statistics of Stock");
+				
+				bExport = new JButton(exportIcon);
+				bExport.setBounds(80 + 64 * 6 + BUTTON_SPACE * 10, 505, 64, 64);
+				bExport.setToolTipText("Export goods in Excel");
+				
+				bSale = new JButton(saleIcon);
+				bSale.setBounds(64 * 7 + BUTTON_SPACE * 15+200, 435, 64, 64);
+				bSale.setToolTipText("Sale product");
+				
+				bIncome = new JButton(incomeIcon);
+				bIncome.setBounds(64 * 7 + BUTTON_SPACE * 15+130, 435, 64, 64);
+				bIncome.setToolTipText("Arrived at stock");
+
+				// Buttons on saleGoods
+
+				bSaleRemove = new JButton(goodRemoveIcon);
+				bSaleRemove.setBounds(BUTTON_SPACE * 2, 435, 64, 64);
+				bSaleRemove.setToolTipText("Product Return");
+
+				bSaleStatistic = new JButton(statisticsIcon);
+				bSaleStatistic.setBounds(64 * 1 + BUTTON_SPACE * 3, 435, 64, 64);
+				bSaleStatistic.setToolTipText("Statistics of SaleGoods");
 
 		mainPanel.setLayout(new BorderLayout());
 		mainPanel.add(title, BorderLayout.NORTH);
@@ -136,16 +233,62 @@ public class MainWindow extends JFrame implements ChangeListener {
 		subgroups = new ArrayList<Subgroup>();
 		saleGoods = new ArrayList<SaleGoods>();
 		
-		// Fill Arraylists 
-		GoodsReader gr = new GoodsReader();
-		goods = gr.getProductsList();
-		GroupsReader grr = new GroupsReader();
-		groups = grr.getGroupsList();
-		SubgroupsReader sgr = new SubgroupsReader();
-		subgroups = sgr.getSubGroupsList();
+		// Fill Arraylists
+
+		if (groupstxt.exists()&&groupstxt.length()>5) {
+			GroupsReader grr = new GroupsReader();
+			groups = grr.getGroupsList();
+			
+		}
+		else{
+			bGroupEdit.setEnabled(false);
+			bGroupRemove.setEnabled(false);
+			bSubgroupAdd.setEnabled(false);
+			bSubgroupEdit.setEnabled(false);
+			bSubgroupRemove.setEnabled(false);
+			bGoodsAdd.setEnabled(false);
+			bGoodsEdit.setEnabled(false);
+			bGoodsRemove.setEnabled(false);
+			bSearch.setEnabled(false);
+			bStatistic.setEnabled(false);
+			bSale.setEnabled(false);
+			bExport.setEnabled(false);
+			bIncome.setEnabled(false);
+		}
+		if (subgroupstxt.exists()&&subgroupstxt.length()>5) {
+			SubgroupsReader sgr = new SubgroupsReader();
+			subgroups = sgr.getSubGroupsList();
+		}
+		else{
+			bSubgroupEdit.setEnabled(false);
+			bSubgroupRemove.setEnabled(false);
+			bGoodsAdd.setEnabled(false);
+			bGoodsEdit.setEnabled(false);
+			bGoodsRemove.setEnabled(false);
+			bSearch.setEnabled(false);
+			bStatistic.setEnabled(false);
+			bSale.setEnabled(false);
+			bExport.setEnabled(false);
+			bIncome.setEnabled(false);
+		}
+		if (goodstxt.exists()&&goodstxt.length()>5) {
+			GoodsReader gr = new GoodsReader();
+			goods = gr.getProductsList();
+		}
+		else{
+			bGoodsEdit.setEnabled(false);
+			bGoodsRemove.setEnabled(false);
+			bSearch.setEnabled(false);
+			bStatistic.setEnabled(false);
+			bSale.setEnabled(false);
+			bExport.setEnabled(false);
+			bIncome.setEnabled(false);
+		}
+		if (sale_goodstxt.exists()) {
 		SaleGoodsReader slgr = new SaleGoodsReader();
 		saleGoods = slgr.getProductsList();
-		
+		}
+	
 
 		// Table Goods
 		goodsModel = new TableModelGoods(goods);
@@ -174,97 +317,12 @@ public class MainWindow extends JFrame implements ChangeListener {
 				}
 			}
 		});
-
-		// Icons on the buttons
-		Icon groupAddIcon = new ImageIcon("images\\Add_Group.png");
-		Icon groupEditIcon = new ImageIcon("images\\Edit_Group.png");
-		Icon groupRemoveIcon = new ImageIcon("images\\Delete_Group.png");
-
-		Icon subgroupAddIcon = new ImageIcon("images\\Add_Subgroup.png");
-		Icon subgroupEditIcon = new ImageIcon("images\\Edit_Subgroup.png");
-		Icon subgroupRemoveIcon = new ImageIcon("images\\Delete_Subgroup.png");
-
-		Icon goodAddIcon = new ImageIcon("images\\Add_Good.png");
-		Icon goodEditIcon = new ImageIcon("images\\Edit_Good.png");
-		Icon goodRemoveIcon = new ImageIcon("images\\Delete_Good.png");
-
-		Icon searchIcon = new ImageIcon("images\\Search.png");
-		Icon statisticsIcon = new ImageIcon("images\\Statistic.png");
-		Icon saleIcon = new ImageIcon("images\\Sale.png");
-		
-		Icon exportIcon = new ImageIcon("images\\Export.png");
-		Icon incomeIcon = new ImageIcon("images\\Income.png");
 		
 		
+
 		
-		Icon really = new ImageIcon("images\\Really.png");
 
-		// Buttons on Goods
-		bGroupAdd = new JButton(groupAddIcon);
-		bGroupAdd.setBounds(BUTTON_SPACE * 2, 435, 64, 64);
-		bGroupAdd.setToolTipText("Add group");
-
-		bGroupEdit = new JButton(groupEditIcon);
-		bGroupEdit.setBounds(32 + 5 + BUTTON_SPACE * 2, 505, 64, 64);
-		bGroupEdit.setToolTipText("Edit group");
-
-		bGroupRemove = new JButton(groupRemoveIcon);
-		bGroupRemove.setBounds(BUTTON_SPACE * 3 + 64, 435, 64, 64);
-		bGroupRemove.setToolTipText("Delete group");
-
-		bSubgroupAdd = new JButton(subgroupAddIcon);
-		bSubgroupAdd.setBounds(64 * 2 + BUTTON_SPACE * 6, 435, 64, 64);
-		bSubgroupAdd.setToolTipText("Add Subgroup");
-
-		bSubgroupEdit = new JButton(subgroupEditIcon);
-		bSubgroupEdit.setBounds(37 + 64 * 2 + BUTTON_SPACE * 6, 505, 64, 64);
-		bSubgroupEdit.setToolTipText("Edit Subgroup");
-
-		bSubgroupRemove = new JButton(subgroupRemoveIcon);
-		bSubgroupRemove.setBounds(64 * 3 + BUTTON_SPACE * 7, 435, 64, 64);
-		bSubgroupRemove.setToolTipText("Delete Subgroup");
-
-		bGoodsAdd = new JButton(goodAddIcon);
-		bGoodsAdd.setBounds(64 * 4 + BUTTON_SPACE * 10, 435, 64, 64);
-		bGoodsAdd.setToolTipText("Add product");
-
-		bGoodsEdit = new JButton(goodEditIcon);
-		bGoodsEdit.setBounds(37 + 64 * 4 + BUTTON_SPACE * 10, 505, 64, 64);
-		bGoodsEdit.setToolTipText("Edit product");
-
-		bGoodsRemove = new JButton(goodRemoveIcon);
-		bGoodsRemove.setBounds(64 * 5 + BUTTON_SPACE * 11, 435, 64, 64);
-		bGoodsRemove.setToolTipText("Delete product");
-
-		bSearch = new JButton(searchIcon);
-		bSearch.setBounds(64 * 6 + BUTTON_SPACE * 14, 435, 64, 64);
-		bSearch.setToolTipText("Find product");
-
-		bStatistic = new JButton(statisticsIcon);
-		bStatistic.setBounds(64 * 7 + BUTTON_SPACE * 15, 435, 64, 64);
-		bStatistic.setToolTipText("Statistics of Stock");
 		
-		bExport = new JButton(exportIcon);
-		bExport.setBounds(80 + 64 * 6 + BUTTON_SPACE * 10, 505, 64, 64);
-		bExport.setToolTipText("Export goods in Excel");
-		
-		bSale = new JButton(saleIcon);
-		bSale.setBounds(64 * 7 + BUTTON_SPACE * 15+200, 435, 64, 64);
-		bSale.setToolTipText("Sale product");
-		
-		bIncome = new JButton(incomeIcon);
-		bIncome.setBounds(64 * 7 + BUTTON_SPACE * 15+130, 435, 64, 64);
-		bIncome.setToolTipText("Arrived at stock");
-
-		// Buttons on saleGoods
-
-		bSaleRemove = new JButton(goodRemoveIcon);
-		bSaleRemove.setBounds(BUTTON_SPACE * 2, 435, 64, 64);
-		bSaleRemove.setToolTipText("Product Return");
-
-		bSaleStatistic = new JButton(statisticsIcon);
-		bSaleStatistic.setBounds(64 * 1 + BUTTON_SPACE * 3, 435, 64, 64);
-		bSaleStatistic.setToolTipText("Statistics of SaleGoods");
 
 		// Add tabs
 		goodsAll.addTab("Goods", pFirstTab);
@@ -291,7 +349,9 @@ public class MainWindow extends JFrame implements ChangeListener {
 		pFirstTab.add(bSale);
 		pFirstTab.add(bExport);
 		pFirstTab.add(bIncome);
-
+		
+		
+		
 		// RADIO BUTTONS on first tab
 		JLabel label2 = new JLabel("Show Goods:");
 		label2.setBounds(30, 45, 100, 23);
