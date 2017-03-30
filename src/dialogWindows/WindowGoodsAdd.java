@@ -18,6 +18,8 @@ import javax.swing.SwingConstants;
 
 import main.Main;
 import objectsForStore.Goods;
+import objectsForStore.Group;
+import objectsForStore.Subgroup;
 import streams.GoodsWriter;
 
 public class WindowGoodsAdd extends JDialog{
@@ -202,6 +204,22 @@ public class WindowGoodsAdd extends JDialog{
 				return;
 			}
 		}
+		for (int i = 0; i < Main.mainWindow.groups.size(); i++){
+			Group group = Main.mainWindow.groups.get(i);
+			String str2 = group.getGroupName().toLowerCase();
+			if (temp_str.equals(str2)){
+				JOptionPane.showMessageDialog(null, "Such entry already exists!");
+				
+				return;
+			}
+		}
+			for (Subgroup sgr : Main.mainWindow.subgroups) {
+				if (temp_str.equals(sgr.getSubgroupName().toLowerCase())){
+					JOptionPane.showMessageDialog(null, "Such entry already exists!");
+					
+					return;
+				}
+			}
 		
 		//If the same name is not found - preparing the new good
 		int subgroupID = Main.mainWindow.getSubgroupIDByName((String) comboSubgroup.getSelectedItem());
