@@ -39,6 +39,12 @@ public class WindowStatisticSaleGoods extends JDialog{
 				break;
 				}
 			}
+			for (Goods g : Main.mainWindow.deletedGoods) {
+				if(Main.mainWindow.saleGoods.get(i).getSaleGoodsID()==g.getID()){
+				tempPrice = g.getPrice();
+				break;
+				}
+			}
 			double temp = tempPrice * Main.mainWindow.saleGoods.get(i).getQuantity();
 			totalQuant += Main.mainWindow.saleGoods.get(i).getQuantity();
 			totalValue += temp;

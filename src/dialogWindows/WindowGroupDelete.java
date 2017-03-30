@@ -14,6 +14,7 @@ import javax.swing.JPanel;
 import javax.swing.SwingConstants;
 
 import main.Main;
+import streams.DeletedGoodsWriter;
 import streams.GoodsWriter;
 import streams.GroupsWriter;
 import streams.SubgroupsWriter;
@@ -28,12 +29,12 @@ public class WindowGroupDelete extends JDialog {
 	JComboBox allGroups = new JComboBox();
 	eHandler available_handler = new eHandler();
 	public boolean result;
-	
+
 	JButton ok, cancel;
 
 	public WindowGroupDelete(Frame parent) {
 		super(parent, true);
-		
+
 		setLocation(500, 200);
 		setSize(300, 260);
 		setResizable(false);
@@ -43,12 +44,12 @@ public class WindowGroupDelete extends JDialog {
 		title.setHorizontalAlignment(SwingConstants.CENTER);
 		title.setFont(new Font("Times New Roman", Font.BOLD, 12));
 		title.setBounds(100, 8, 100, 30);
-		getContentPane().add (title);
-		
+		getContentPane().add(title);
+
 		labelChose.setText("Chose group:");
 		labelChose.setBounds(10, 35, 100, 30);
 		getContentPane().add(labelChose);
-		
+
 		String[] string = Main.mainWindow.getGroupNames();
 		allGroups.setModel(new DefaultComboBoxModel(string));
 		allGroups.setBounds(120, 35, 160, 30);
@@ -58,63 +59,64 @@ public class WindowGroupDelete extends JDialog {
 		warning.setText("Warning! You will delete all Goods from this group!");
 		warning.setBounds(30, 80, 250, 30);
 		getContentPane().add(warning);
-		
-		
-		ok = new JButton ("OK");
+
+		ok = new JButton("OK");
 		ok.setBounds(30, 190, 100, 23);
 		getContentPane().add(ok);
 		ok.addActionListener(available_handler);
-		
-		
-		cancel = new JButton ("Cancel");
+
+		cancel = new JButton("Cancel");
 		cancel.setBounds(160, 190, 100, 23);
 		getContentPane().add(cancel);
 		cancel.addActionListener(available_handler);
-		
-		
+
 	}
-	
-	
+
 	class listener implements ActionListener {
 		public void actionPerformed(ActionEvent e) {
 			if (e.getSource() == allGroups) {
 
 				indexOfTempGroopInArrayList = allGroups.getSelectedIndex();
-				
+
 			}
 		}
 	}
-	
+
 	public void setResult() {
 		int tempGroupID = Main.mainWindow.groups.get(indexOfTempGroopInArrayList).getGroupID();
-		
-		for(int i=0;i<Main.mainWindow.goods.size();){
-			if(Main.mainWindow.goods.get(i).getGroupID()==tempGroupID)
+
+		for (int i = 0; i < Main.mainWindow.goods.size();) {
+			if (Main.mainWindow.goods.get(i).getGroupID() == tempGroupID) {
+				Main.mainWindow.deletedGoods.add(Main.mainWindow.goods.get(i));
 				Main.mainWindow.goods.remove(i);
-				else i++;
+			} else
+				i++;
 		}
-		
-		for(int i=0;i<Main.mainWindow.subgroups.size();){
-			
-			if(Main.mainWindow.subgroups.get(i).getGroupID()==tempGroupID){
+
+		for (int i = 0; i < Main.mainWindow.subgroups.size();) {
+
+			if (Main.mainWindow.subgroups.get(i).getGroupID() == tempGroupID) {
 				Main.mainWindow.subgroups.remove(i);
-				
-			}
-			else i++;
-			
+
+			} else
+				i++;
+
 		}
-		
+
 		GoodsWriter goodsw = new GoodsWriter();
 		goodsw.saveGoodsInFile(Main.mainWindow.goods);
-		
+
 		SubgroupsWriter sgw = new SubgroupsWriter();
 		sgw.saveSubgroupsInFile(Main.mainWindow.subgroups);
 		
+		DeletedGoodsWriter dgw = new DeletedGoodsWriter();
+		dgw.saveDeletedGoodsInFile(Main.mainWindow.deletedGoods);
+
 		Main.mainWindow.groups.remove(indexOfTempGroopInArrayList);
 		GroupsWriter gw = new GroupsWriter();
 		gw.saveGroupsInFile(Main.mainWindow.groups);
-		
-		if(Main.mainWindow.groups.size()==0){
+
+		if (Main.mainWindow.groups.size() == 0) {
 			Main.mainWindow.bGroupEdit.setEnabled(false);
 			Main.mainWindow.bGroupRemove.setEnabled(false);
 			Main.mainWindow.bSubgroupAdd.setEnabled(false);
@@ -130,26 +132,23 @@ public class WindowGroupDelete extends JDialog {
 			Main.mainWindow.bIncome.setEnabled(false);
 		}
 		WindowGoodsDelete.disableGoodsButtons();
-		
-		
+
 	}
-	
-	public class eHandler implements ActionListener{
+
+	public class eHandler implements ActionListener {
 		public void actionPerformed(ActionEvent e) {
-			
-			if (e.getSource() == ok){
-				
-				
-				   
-					result = true;
-					dispose(); 
+
+			if (e.getSource() == ok) {
+
+				result = true;
+				dispose();
 			}
-			
-			if (e.getSource() == cancel){
+
+			if (e.getSource() == cancel) {
 				result = false;
 				dispose();
 			}
-			
+
 		}
 	}
 

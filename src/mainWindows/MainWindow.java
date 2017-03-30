@@ -39,6 +39,7 @@ import objectsForStore.Goods;
 import objectsForStore.Group;
 import objectsForStore.SaleGoods;
 import objectsForStore.Subgroup;
+import streams.DeletedGoodsReader;
 import streams.GoodsReader;
 import streams.GroupsReader;
 import streams.SaleGoodsReader;
@@ -73,6 +74,7 @@ public class MainWindow extends JFrame implements ChangeListener {
 	public ArrayList<Group> groups;
 	public ArrayList<Subgroup> subgroups;
 	public ArrayList<SaleGoods> saleGoods;
+	public ArrayList<Goods> deletedGoods;
 
 	// --------------------------------------------------------------
 
@@ -113,6 +115,8 @@ public class MainWindow extends JFrame implements ChangeListener {
 	public File groupstxt = new File("data//groups.txt");
 	public File subgroupstxt = new File("data//subgroups.txt");
 	public File sale_goodstxt = new File("data//sale_goods.txt");
+	public File deleted_goodstxt = new File("data//deleted_goods.txt");
+	
 
 	public MainWindow() throws IOException {
 		super();
@@ -232,6 +236,7 @@ public class MainWindow extends JFrame implements ChangeListener {
 		groups = new ArrayList<Group>();
 		subgroups = new ArrayList<Subgroup>();
 		saleGoods = new ArrayList<SaleGoods>();
+		deletedGoods = new ArrayList<Goods>();
 		
 		// Fill Arraylists
 
@@ -288,6 +293,11 @@ public class MainWindow extends JFrame implements ChangeListener {
 		SaleGoodsReader slgr = new SaleGoodsReader();
 		saleGoods = slgr.getProductsList();
 		}
+		if(deleted_goodstxt.exists()){
+			DeletedGoodsReader dgr = new DeletedGoodsReader();
+			deletedGoods = dgr.getDeletedGoodsList();
+		}
+		
 	
 
 		// Table Goods

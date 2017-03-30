@@ -11,6 +11,7 @@ import javax.swing.JLabel;
 import javax.swing.SwingConstants;
 
 import main.Main;
+import streams.DeletedGoodsWriter;
 import streams.GoodsWriter;
 
 
@@ -54,14 +55,19 @@ public class WindowGoodsDelete extends JDialog{
 
 			@Override
 			public void actionPerformed(ActionEvent e) {
+				int tempID;
 				for(int i =0;i<Main.mainWindow.goods.size();i++){
-					int tempID = Main.mainWindow.goods.get(i).getID();
-					if(tempID==id)
-						Main.mainWindow.goods.remove(Main.mainWindow.goods.get(i));
+					tempID = Main.mainWindow.goods.get(i).getID();
+					if(tempID==id){
+						Main.mainWindow.deletedGoods.add(Main.mainWindow.goods.get(i));
+						Main.mainWindow.goods.remove(Main.mainWindow.goods.get(i));					
+					}
 				}
 				
 				GoodsWriter gw = new GoodsWriter();
 				gw.saveGoodsInFile(Main.mainWindow.goods);
+				DeletedGoodsWriter dgw = new DeletedGoodsWriter();
+				dgw.saveDeletedGoodsInFile(Main.mainWindow.deletedGoods);
 				
 				dispose();
 				Main.mainWindow.radio1.setSelected(true);

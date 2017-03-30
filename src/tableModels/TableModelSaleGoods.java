@@ -65,6 +65,13 @@ public class TableModelSaleGoods extends AbstractTableModel{
 			if(g.getID()==goodIndex.getSaleGoodsID())
 				tempGood =g;
 		}
+		if(tempGood==null){
+			for (Goods g : Main.mainWindow.deletedGoods) {
+				if(g.getID()==goodIndex.getSaleGoodsID())
+					tempGood =g;
+			}
+		}
+		
         switch (columnIndex) {
         case 0:
             return goodIndex.getDate();

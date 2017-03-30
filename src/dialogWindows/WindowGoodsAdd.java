@@ -230,14 +230,26 @@ public class WindowGoodsAdd extends JDialog{
 		if (price.equals("")) price = "0";
 		
 		//First Tab (Goods)
-		if(Main.mainWindow.goods.size()>0){
-		product = new Goods(Main.mainWindow.goods.get(Main.mainWindow.goods.size()-1).getID()+1, subgroupID, jt_name.getText(), jt_description.getText(), jt_producer.getText(), 
-				Double.parseDouble(quantity), Double.parseDouble(price), jt_measureType.getText());
-		}
+		int idOfNewProduct=0;
+		if(Main.mainWindow.goods.size()==0&&Main.mainWindow.deletedGoods.size()==0)
+			idOfNewProduct=1;
 		else{
-			product = new Goods(1, subgroupID, jt_name.getText(), jt_description.getText(), jt_producer.getText(), 
-					Double.parseDouble(quantity), Double.parseDouble(price), jt_measureType.getText());
+			for (Goods g : Main.mainWindow.goods) {
+				if(g.getID()>idOfNewProduct)
+					idOfNewProduct=g.getID();
+			}
+			for (Goods g : Main.mainWindow.deletedGoods) {
+				if(g.getID()>idOfNewProduct)
+					idOfNewProduct=g.getID();
+			}
+			idOfNewProduct++;
 		}
+		
+		
+		product = new Goods(idOfNewProduct, subgroupID, jt_name.getText(), jt_description.getText(), jt_producer.getText(), 
+				Double.parseDouble(quantity), Double.parseDouble(price), jt_measureType.getText());
+		
+		
 		Main.mainWindow.goods.add(product);
 		GoodsWriter gw = new GoodsWriter();
 		gw.saveGoodsInFile(Main.mainWindow.goods);
