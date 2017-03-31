@@ -2,6 +2,8 @@ package dialogWindows;
 
 import java.awt.Frame;
 
+import javax.swing.JLabel;
+
 import main.Main;
 import objectsForStore.Goods;
 import streams.GoodsWriter;
@@ -9,6 +11,7 @@ import streams.GoodsWriter;
 public class WindowGoodsEdit extends WindowGoodsAdd {
 	Goods tempGood;
 	int indexOfTempGoodInArrayList;
+	JLabel tempQuant;
 
 	public WindowGoodsEdit(Frame parent, int id) {
 		super(parent);
@@ -34,13 +37,18 @@ public class WindowGoodsEdit extends WindowGoodsAdd {
 			}
 
 		}
+		jt_quantity.setText(""+tempGood.getQuantity());
+		getContentPane().remove(jt_quantity);
+		tempQuant = new JLabel(""+tempGood.getQuantity());
+		tempQuant.setBounds(124, 63+14*10+15*6-3, 146, 25);
+		getContentPane().add(tempQuant);
 
 		comboSubgroup.setSelectedIndex(index);
 		jt_name.setText(tempGood.getName());
 		jt_description.setText(tempGood.getDesc());
 		jt_producer.setText(tempGood.getMaker());
 		jt_price.setText("" + tempGood.getPrice());
-		jt_quantity.setText("" + tempGood.getQuantity());
+		
 		jt_measureType.setText(tempGood.getUnit());
 
 	}
@@ -52,13 +60,13 @@ public class WindowGoodsEdit extends WindowGoodsAdd {
 		int subgroupID = Main.mainWindow.getSubgroupIDByName((String) comboSubgroup.getSelectedItem());
 
 		// перевіряємо, чи не введено у числі випадково кому замість крапки
-		String quantity = setCommas(jt_quantity.getText());
+		
 		String price = setCommas(jt_price.getText());
 		if (price.equals(""))
 			price = "0";
 		
 			product = new Goods(tempGood.getID(), subgroupID, jt_name.getText().trim(), jt_description.getText(), jt_producer.getText().trim(),
-					Double.parseDouble(quantity), Double.parseDouble(price), jt_measureType.getText().trim());
+					tempGood.getQuantity(), Double.parseDouble(price), jt_measureType.getText().trim());
 		
 		
 		Main.mainWindow.goods.remove(indexOfTempGoodInArrayList);
