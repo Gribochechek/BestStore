@@ -14,6 +14,7 @@ import java.util.ArrayList;
 
 import javax.swing.ButtonGroup;
 import javax.swing.DefaultComboBoxModel;
+import javax.swing.DefaultListSelectionModel;
 import javax.swing.Icon;
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
@@ -28,6 +29,7 @@ import javax.swing.JSpinner;
 import javax.swing.JTabbedPane;
 import javax.swing.JTable;
 import javax.swing.JTextField;
+import javax.swing.ListSelectionModel;
 import javax.swing.event.ChangeEvent;
 import javax.swing.event.ChangeListener;
 import javax.swing.table.AbstractTableModel;
@@ -304,6 +306,9 @@ public class MainWindow extends JFrame implements ChangeListener {
 		goodsModel = new TableModelGoods(goods);
 		goodsTable = new JTable(goodsModel);
 		goodsTable.getTableHeader().setReorderingAllowed(false);
+		ListSelectionModel lm = new DefaultListSelectionModel();
+	    lm.setSelectionMode(ListSelectionModel.SINGLE_SELECTION );
+	    goodsTable.setSelectionModel(lm);
 		setColumnWidth(goodsTable, new int[] { 5, 170, 60, 180, 15, 15, 20 });
 		jsp1 = new JScrollPane(goodsTable);
 		jsp1.setBounds(20, 80, 850, 351);
@@ -313,6 +318,7 @@ public class MainWindow extends JFrame implements ChangeListener {
 		saleGoodsModel = new TableModelSaleGoods(saleGoods);
 		saleGoodsTable = new JTable(saleGoodsModel);
 		saleGoodsTable.getTableHeader().setReorderingAllowed(false);
+		saleGoodsTable.setSelectionModel(lm);
 		setColumnWidth(saleGoodsTable, new int[] { 50, 100, 50, 30, 30, 30 });
 		jsp2 = new JScrollPane(saleGoodsTable);
 		jsp2.setBounds(20, 80, 850, 351);
@@ -407,7 +413,7 @@ public class MainWindow extends JFrame implements ChangeListener {
 		jl2.setBounds(375, 5, 150, 21);
 		jl2.setFont(new Font("Times New Roman", Font.BOLD, 16));
 		pSecondTab.add(jl2);
-		pSecondTab.add(jsp2);  // тут почему-то нулл поинтер эксепшн
+		pSecondTab.add(jsp2);  
 		pSecondTab.add(bSaleRemove);
 		pSecondTab.add(bSaleStatistic);
 
