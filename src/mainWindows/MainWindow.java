@@ -548,7 +548,6 @@ public class MainWindow extends JFrame implements ChangeListener {
 	}
 	
 
-
 	public void stateChanged(ChangeEvent arg0) {}
 
 }

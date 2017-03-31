@@ -54,16 +54,16 @@ public class WindowGroupEdit extends WindowGroupAdd {
 
 	public void setResult() {
 		
-		String temp_str = jt_name.getText();
-		if (!oldText.equals(temp_str)) {
+		String temp_str = jt_name.getText().trim();
+		if (!oldText.equals(temp_str.toLowerCase())) {
 			for (Group gr : Main.mainWindow.groups) {
-				if(gr.getGroupName().toLowerCase().equals(temp_str)){
+				if(gr.getGroupName().toLowerCase().equals(temp_str.toLowerCase())){
 					JOptionPane.showMessageDialog(null, "Such entry already exists!");
 					return;
 				}		
 			}
 			for (Subgroup gr : Main.mainWindow.subgroups) {
-				if(gr.getSubgroupName().toLowerCase().equals(temp_str)){
+				if(gr.getSubgroupName().toLowerCase().equals(temp_str.toLowerCase())){
 					JOptionPane.showMessageDialog(null, "Such entry already exists!");
 					return;
 				}		

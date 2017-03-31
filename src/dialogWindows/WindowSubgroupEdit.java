@@ -46,7 +46,7 @@ public class WindowSubgroupEdit extends WindowGroupEdit {
 	}
 
 	public void setResult() {
-		String temp_str = jt_name.getText().toLowerCase();
+		String temp_str = jt_name.getText().toLowerCase().trim();
 
 		if (!oldText.equals(temp_str)) {
 			for (Group gr : Main.mainWindow.groups) {
@@ -64,7 +64,7 @@ public class WindowSubgroupEdit extends WindowGroupEdit {
 		}
 
 		tempSubgroup = new Subgroup(Main.mainWindow.subgroups.get(indexOfTempGroopInArrayList).getGroupID(),
-				Main.mainWindow.subgroups.get(indexOfTempGroopInArrayList).getSubgroupID(), jt_name.getText());
+				Main.mainWindow.subgroups.get(indexOfTempGroopInArrayList).getSubgroupID(), jt_name.getText().trim());
 		Main.mainWindow.subgroups.remove(indexOfTempGroopInArrayList);
 		Main.mainWindow.subgroups.add(indexOfTempGroopInArrayList, tempSubgroup);
 

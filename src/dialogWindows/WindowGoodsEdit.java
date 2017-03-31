@@ -57,8 +57,8 @@ public class WindowGoodsEdit extends WindowGoodsAdd {
 		if (price.equals(""))
 			price = "0";
 		
-			product = new Goods(tempGood.getID(), subgroupID, jt_name.getText(), jt_description.getText(), jt_producer.getText(),
-					Double.parseDouble(quantity), Double.parseDouble(price), jt_measureType.getText());
+			product = new Goods(tempGood.getID(), subgroupID, jt_name.getText().trim(), jt_description.getText(), jt_producer.getText().trim(),
+					Double.parseDouble(quantity), Double.parseDouble(price), jt_measureType.getText().trim());
 		
 		
 		Main.mainWindow.goods.remove(indexOfTempGoodInArrayList);

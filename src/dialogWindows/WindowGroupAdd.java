@@ -83,7 +83,7 @@ public class WindowGroupAdd extends JDialog {
 
 	public void setResult() {
 		//перевіряємо наявність у базі аналогічного найменування
-				String temp_str = jt_name.getText().toLowerCase();
+				String temp_str = jt_name.getText().toLowerCase().trim();
 				for (int i = 0; i < Main.mainWindow.groups.size(); i++){
 					Group group = Main.mainWindow.groups.get(i);
 					String str2 = group.getGroupName().toLowerCase();
@@ -105,10 +105,10 @@ public class WindowGroupAdd extends JDialog {
 			
 				//если групп еще нет - приссваиваем первой ID = 1, если есть - ID последнего в списке +1
 				if(Main.mainWindow.groups.size()>0){
-				group = new Group(Main.mainWindow.groups.get(Main.mainWindow.groups.size()-1).getGroupID()+1, jt_name.getText(), jt_description.getText());
+				group = new Group(Main.mainWindow.groups.get(Main.mainWindow.groups.size()-1).getGroupID()+1, jt_name.getText().trim(), jt_description.getText());
 				}
 				else{
-					group = new Group(1, jt_name.getText(), jt_description.getText());
+					group = new Group(1, jt_name.getText().trim(), jt_description.getText());
 				}
 				Main.mainWindow.groups.add(group);
 				

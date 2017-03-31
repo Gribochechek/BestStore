@@ -148,23 +148,23 @@ public class WindowGoodsAdd extends JDialog{
 					JOptionPane.showMessageDialog(null, "Subgroup is empty");
 					return;
 				}
-				if (jt_name.getText().equals("")) {
+				if (jt_name.getText().trim().equals("")) {
 					JOptionPane.showMessageDialog(null, "Invalid Name format");
 					return;
 				}
-				if (jt_quantity.getText().equals("")) {
+				if (jt_quantity.getText().trim().equals("")) {
 					JOptionPane.showMessageDialog(null, "Invalid Quantity format");
 					return;
 				}
-				if (jt_measureType.getText().equals("")) {
+				if (jt_measureType.getText().trim().equals("")) {
 					JOptionPane.showMessageDialog(null, "Invalid Measurement format");
 					return;
 				}
-				if (jt_price.getText().equals("")||!isDouble(jt_price.getText())) {
+				if (jt_price.getText().trim().equals("")||!isDouble(jt_price.getText().trim())) {
 					JOptionPane.showMessageDialog(null, "Invalid Price format");
 					return;
 				}
-				if (!isDouble(jt_quantity.getText())) {
+				if (!isDouble(jt_quantity.getText().trim())) {
 					JOptionPane.showMessageDialog(null, "Invalid Quantity format");
 					return;
 				}
@@ -194,11 +194,11 @@ public class WindowGoodsAdd extends JDialog{
 	
 	void setResult(){
 		//Check unique name
-		String temp_str = jt_name.getText();
+		String temp_str = jt_name.getText().trim();
 		for (int i = 0; i < Main.mainWindow.goods.size(); i++){
 			Goods goods = Main.mainWindow.goods.get(i);
 			String str2 = goods.getName();
-			if (temp_str.equals(str2)){
+			if (temp_str.toLowerCase().equals(str2.toLowerCase())){
 				JOptionPane.showMessageDialog(null, "Such entry already exists!");
 				Main.mainWindow.goodsTable.setRowSelectionInterval(i, i); //highlight the row with the same name
 				return;
@@ -207,14 +207,14 @@ public class WindowGoodsAdd extends JDialog{
 		for (int i = 0; i < Main.mainWindow.groups.size(); i++){
 			Group group = Main.mainWindow.groups.get(i);
 			String str2 = group.getGroupName().toLowerCase();
-			if (temp_str.equals(str2)){
+			if (temp_str.toLowerCase().equals(str2.toLowerCase())){
 				JOptionPane.showMessageDialog(null, "Such entry already exists!");
 				
 				return;
 			}
 		}
 			for (Subgroup sgr : Main.mainWindow.subgroups) {
-				if (temp_str.equals(sgr.getSubgroupName().toLowerCase())){
+				if (temp_str.toLowerCase().equals(sgr.getSubgroupName().toLowerCase())){
 					JOptionPane.showMessageDialog(null, "Such entry already exists!");
 					
 					return;
@@ -246,8 +246,8 @@ public class WindowGoodsAdd extends JDialog{
 		}
 		
 		
-		product = new Goods(idOfNewProduct, subgroupID, jt_name.getText(), jt_description.getText(), jt_producer.getText(), 
-				Double.parseDouble(quantity), Double.parseDouble(price), jt_measureType.getText());
+		product = new Goods(idOfNewProduct, subgroupID, jt_name.getText().trim(), jt_description.getText(), jt_producer.getText().trim(), 
+				Double.parseDouble(quantity), Double.parseDouble(price), jt_measureType.getText().trim());
 		
 		
 		Main.mainWindow.goods.add(product);

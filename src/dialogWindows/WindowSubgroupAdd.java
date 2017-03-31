@@ -54,11 +54,11 @@ public class WindowSubgroupAdd extends WindowGroupAdd{
 	public void setResult() {
 		
 
-		String temp_str = jt_name.getText();
+		String temp_str = jt_name.getText().trim();
 		for (int i = 0; i < Main.mainWindow.subgroups.size(); i++){
 			Subgroup group = Main.mainWindow.subgroups.get(i);
 			String str2 = group.getSubgroupName();
-			if (temp_str.equals(str2)){
+			if (temp_str.toLowerCase().equals(str2.toLowerCase())){
 				JOptionPane.showMessageDialog(null, "Such entry already exists!");
 				
 				return;
@@ -75,10 +75,10 @@ public class WindowSubgroupAdd extends WindowGroupAdd{
 	
 		groupID =  Main.mainWindow.groups.get(allGroups.getSelectedIndex()).getGroupID();
 		if(Main.mainWindow.subgroups.size()>0){
-			subgroup = new Subgroup(groupID, Main.mainWindow.subgroups.get(Main.mainWindow.subgroups.size()-1).getSubgroupID()+1, jt_name.getText());
+			subgroup = new Subgroup(groupID, Main.mainWindow.subgroups.get(Main.mainWindow.subgroups.size()-1).getSubgroupID()+1, jt_name.getText().trim());
 		}
 		else{
-			subgroup = new Subgroup(groupID, 1, jt_name.getText());
+			subgroup = new Subgroup(groupID, 1, jt_name.getText().trim());
 		}
 		Main.mainWindow.subgroups.add(subgroup);
 		
