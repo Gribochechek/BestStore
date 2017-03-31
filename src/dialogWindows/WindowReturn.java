@@ -7,12 +7,15 @@ import java.awt.event.ActionListener;
 import javax.swing.JButton;
 import javax.swing.JDialog;
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
 import javax.swing.JSlider;
+import javax.swing.JTextField;
 import javax.swing.SwingConstants;
 import javax.swing.event.ChangeEvent;
 import javax.swing.event.ChangeListener;
 
 import main.Main;
+import dialogWindows.WindowSale;
 import objectsForStore.Goods;
 import objectsForStore.SaleGoods;
 import streams.GoodsWriter;
@@ -25,7 +28,7 @@ public class WindowReturn extends JDialog {
 	JSlider slider;
 	Goods tempGood;
 	SaleGoods tempSalegood;
-	JLabel tf;
+	JTextField tf;
 	private ChangeListener listener;
 	int indexOfTempGood;
 
@@ -75,10 +78,15 @@ public class WindowReturn extends JDialog {
 		slider.setBounds(10, 110, 220, 30);
 		slider.setSnapToTicks(true);
 		slider.setPaintLabels(true);
-		slider.setMajorTickSpacing((int) tempSalegood.getQuantity() / 5);
-		slider.setMinorTickSpacing((int) tempSalegood.getQuantity() / 10);
-		tf = new JLabel("0");
-		tf.setBounds(240, 110, 30, 30);
+		if((int) tempSalegood.getQuantity()<10000){
+			slider.setMajorTickSpacing((int) tempSalegood.getQuantity() / 5);
+			slider.setMinorTickSpacing(1);
+			}else{
+				slider.setMajorTickSpacing((int) tempSalegood.getQuantity() / 2);
+				slider.setMinorTickSpacing(1);
+			}
+		tf = new JTextField("0");
+		tf.setBounds(230, 100, 45, 30);
 		listener = new ChangeListener() {
 			@Override
 			public void stateChanged(ChangeEvent event) {
@@ -100,6 +108,12 @@ public class WindowReturn extends JDialog {
 
 			@Override
 			public void actionPerformed(ActionEvent arg0) {
+				if(!WindowSale.isInt(tf.getText())||(int) tempSalegood.getQuantity()<Integer.parseInt(tf.getText())){
+					JOptionPane.showMessageDialog(null, "Illegal Quantity format");
+	
+				}else{
+					slider.setValue(Integer.parseInt(tf.getText()));
+				
 				if (slider.getValue() < 1) {
 					dispose();
 				} else {
@@ -119,7 +133,7 @@ public class WindowReturn extends JDialog {
 
 					SaleGoodsWriter sgw = new SaleGoodsWriter();
 					sgw.saveSaleGoodsInFile(Main.mainWindow.saleGoods);
-
+				}
 				}
 			}
 

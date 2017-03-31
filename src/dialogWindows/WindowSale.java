@@ -10,7 +10,9 @@ import java.util.Date;
 import javax.swing.JButton;
 import javax.swing.JDialog;
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
 import javax.swing.JSlider;
+import javax.swing.JTextField;
 import javax.swing.SwingConstants;
 import javax.swing.event.ChangeEvent;
 import javax.swing.event.ChangeListener;
@@ -28,7 +30,7 @@ public class WindowSale extends JDialog {
 	JSlider slider;
 	Goods tempGood;
 	SaleGoods salegood;
-	JLabel tf;
+	JTextField tf;
 	private ChangeListener listener;
 	int indexOfTempGood;
 
@@ -77,10 +79,15 @@ public class WindowSale extends JDialog {
 		slider.setBounds(10, 110, 220, 30);
 		slider.setSnapToTicks(true);
 		slider.setPaintLabels(true);
+		if((int) tempGood.getQuantity()<10000){
 		slider.setMajorTickSpacing((int) tempGood.getQuantity() / 5);
-		slider.setMinorTickSpacing((int) tempGood.getQuantity() / 10);
-		tf = new JLabel("0");
-		tf.setBounds(240, 110, 30, 30);
+		slider.setMinorTickSpacing(1);
+		}else{
+			slider.setMajorTickSpacing((int) tempGood.getQuantity() / 2);
+			slider.setMinorTickSpacing(1);
+		}
+		tf = new JTextField("0");
+		tf.setBounds(230, 100, 45, 30);
 		listener = new ChangeListener() {
 			@Override
 			public void stateChanged(ChangeEvent event) {
@@ -102,6 +109,10 @@ public class WindowSale extends JDialog {
 
 			@Override
 			public void actionPerformed(ActionEvent arg0) {
+				if(!isInt(tf.getText())||(int) tempGood.getQuantity()<Integer.parseInt(tf.getText())){
+					JOptionPane.showMessageDialog(null, "Illegal Quantity format");
+				}else{
+					slider.setValue(Integer.parseInt(tf.getText()));
 				if (slider.getValue() < 1) {
 					dispose();
 				} else {
@@ -110,7 +121,7 @@ public class WindowSale extends JDialog {
 					dateFormat = new SimpleDateFormat("ddMMMyyyy HH:mm:ss");
 					String sData = dateFormat.format(date);
 					salegood = new SaleGoods(tempGood.getID(), sData, slider.getValue());
-					Main.mainWindow.goods.get(indexOfTempGood).setQuantity(Main.mainWindow.goods.get(indexOfTempGood).getQuantity() - slider.getValue());
+					Main.mainWindow.goods.get(indexOfTempGood).setQuantity(Main.mainWindow.goods.get(indexOfTempGood).getQuantity() - Integer.parseInt(tf.getText()));
 					Main.mainWindow.saleGoods.add(salegood);
 					dispose();
 					Main.mainWindow.radio1.setSelected(true);
@@ -126,6 +137,9 @@ public class WindowSale extends JDialog {
 					
 				}
 			}
+			}
+
+			
 
 		});
 
@@ -142,6 +156,20 @@ public class WindowSale extends JDialog {
 
 		});
 
+	}
+	
+	public static boolean isInt(String text) {
+		char[] ch = text.trim().toCharArray();
+		for(int i=0;i<ch.length;i++){
+			if(ch[i]>='0'&&ch[i]<='9'){
+				continue;
+			}
+			else{ 
+				return false;
+			
+			}
+		}
+		return true;
 	}
 
 }
