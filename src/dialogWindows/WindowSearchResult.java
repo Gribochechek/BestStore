@@ -70,14 +70,9 @@ public class WindowSearchResult extends JDialog {
 		} else {
 			jradioList = new ButtonGroup();
 			jrb = new JRadioButton[searchResultList.size()];
-			JRadioButton button = new JRadioButton(searchResultList.get(0).getName(), true);
-			button.setBounds(20, 45, 250, 23);
-			jrb[0] = button;
-			jradioList.add(button);
-			getContentPane().add(button);
-
-			for (int i = 1; i <= searchResultList.size() - 1; i++) {
-				button = new JRadioButton(searchResultList.get(i).getName());
+			
+			for (int i = 0; i <= searchResultList.size() - 1; i++) {
+				JRadioButton button = new JRadioButton(searchResultList.get(i).getName());
 				button.setBounds(20, 45 + i * 25, 250, 23);
 				jradioList.add(button);
 				jrb[i] = button;
